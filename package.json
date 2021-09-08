@@ -1,6 +1,6 @@
 {
-  "homepage": "https://beagle-elgaeb.github.io/mesto-react/",
-  "name": "mesto-react",
+  "homepage": "https://beagle-elgaeb.github.io/mesto-react-auth/",
+  "name": "mesto-react-auth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

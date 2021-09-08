@@ -32,7 +32,7 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
 * возможность редактирования профиля, добавления, удаления и оценки лайками фотографий;  
 * лайф валидация (with _[Formik](https://formik.org/)_ and _[Yup](https://github.com/jquense/yup)_);  
 * проработан UX (при отправке данных на сервер меняется состояние кнопки);  
-* [страница размещена на GitHub Pages](https://beagle-elgaeb.github.io/mesto-react/);  
+* [страница размещена на GitHub Pages](https://beagle-elgaeb.github.io/mesto-react-auth/);  
 * страница адаптируется с контрольными точками: 320px, 680px, 980px; 1280px.  
   
 ### Задачи учебного проекта  
