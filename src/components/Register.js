@@ -36,7 +36,7 @@ function Register() {
           {...formik.getFieldProps("password")}
           placeholder="Пароль"
           required />
-        <button className="register__button" type="submit" aria-label="Войти">Зарегистрироваться</button>
+        <button className="register__button" type="submit" aria-label="Зарегистрироваться">Зарегистрироваться</button>
       </form>
       <p className="register__question">Уже зарешистрирвоаны? <Link className="register__link">Войти</Link></p>
     </section>

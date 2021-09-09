@@ -155,9 +155,11 @@ function App() {
               <Route path="/sign-in">
                 <Login />
               </Route>
+
               <Route path="/sign-up">
                 <Register />
               </Route>
+              
               <Route exact path="/">
                 {loggedIn ? <Redirect to="/content" /> : <Redirect to="/sign-in" />}
               </Route>

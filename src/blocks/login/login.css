@@ -1,4 +1,4 @@
-.register {
+.login {
   width: 358px;
   text-align: center;
   color: #ffffff;
@@ -6,12 +6,12 @@
 }
 
 @media screen and (max-width: 680px) {
-  .register {
+  .login {
     width: 260px;
   }
 }
 
-.register__title {
+.login__title {
   width: 100%;
   line-height: 29px;
   font-size: 24px;
@@ -20,25 +20,25 @@
 }
 
 @media screen and (max-width: 680px) {
-  .register__title {
+  .login__title {
     line-height: 24px;
     font-size: 20px;
     margin: 40px 0;
   }
 }
 
-.register__form {
+.login__form {
   width: 100%;
 }
 
-.register__fieldset {
+.login__fieldset {
   width: 100%;
   border: none;
   margin: 0;
   padding: 0;
 }
 
-.register__input {
+.login__input {
   width: 100%;
   height: 27px;
   background: #000000;
@@ -56,7 +56,7 @@
   font-weight: 400;
 }
 
-.register__button {
+.login__button {
   width: 100%;
   height: 50px;
   background: #FFFFFF;
@@ -68,12 +68,12 @@
   margin: 186px 0 0;
 }
 
-.register__button:hover {
+.login__button:hover {
   opacity: .85;
 }
 
 @media screen and (max-width: 680px) {
-  .register__button {
+  .login__button {
     height: 46px;
     line-height: 19px;
     font-size: 16px;
@@ -82,7 +82,7 @@
   }
 }
 
-.register__question {
+.login__question {
   width: 100%;
   line-height: 17px;
   font-size: 14px;
@@ -90,16 +90,16 @@
 }
 
 @media screen and (max-width: 680px) {
-  .register__question {
+  .login__question {
     margin: 20px 0 0;
   }
 }
 
-.register__link {
+.login__link {
   color: #ffffff;
   text-decoration: none;
 }
 
-.register__link:hover {
+.login__link:hover {
   opacity: .6;
 }
