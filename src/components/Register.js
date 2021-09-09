@@ -4,9 +4,7 @@ import { useFormik } from "formik";
 
 import * as auth from "../utils/Auth.js";
 
-function Register({ history }) {
-  const [message, setMessage] = React.useState("")
-
+function Register({ history, showResult }) {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -17,14 +15,14 @@ function Register({ history }) {
         email: values.email,
         password: values.password,
       })
-        .then((res) => {
-          if (res) {
-            setMessage("Всё ок");
-            history.push("/sign-in");
-          } else {
-            setMessage("Что-то пошло не так!");
-          }
+        .then(() => {
+          showResult(true);
+          history.push("/sign-in");
+        })
+        .catch(() => {
+          showResult(false);
         });
+
     },
   });
 

@@ -8,8 +8,13 @@ export const register = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(res => res.json())
-    .catch((err) => console.log(err));
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error("Ошибка регистрации");
+      }
+    })
 };
 
 export const authorize = ({ email, password }) => {

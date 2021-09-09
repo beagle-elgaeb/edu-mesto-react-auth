@@ -16,6 +16,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
+import InfoTooltip from "./InfoTooltip";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -26,10 +27,13 @@ function App({ history }) {
   const [editAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [editProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [addCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
+  const [infoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
+  const [infoTooltipSuccess, setInfoTooltipSuccess] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState();
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [userData, setUserData] = React.useState("");
 
   const { pathname } = useLocation();
 
@@ -47,6 +51,15 @@ function App({ history }) {
       })
   }, []);
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      loadProfile(token);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   }
@@ -59,10 +72,16 @@ function App({ history }) {
     setAddCardPopupOpen(true);
   }
 
+  function showResult(success) {
+    setInfoTooltipPopupOpen(true);
+    setInfoTooltipSuccess(success);
+  }
+
   function closeAllPopups() {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
+    setInfoTooltipPopupOpen(false);
     setSelectedCard(undefined);
   }
 
@@ -134,8 +153,6 @@ function App({ history }) {
       })
   }
 
-  const [userData, setUserData] = React.useState("");
-
   function loadProfile(token) {
     auth.getContent(token)
       .then((res) => {
@@ -146,14 +163,6 @@ function App({ history }) {
         }
       });
   }
-
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      loadProfile(token);
-    }
-  }, []);
 
   function handleLogin(token) {
     loadProfile(token);
@@ -180,24 +189,30 @@ function App({ history }) {
               <ProtectedRoute
                 path="/content"
                 loggedIn={loggedIn}
-                component={Main}
-                cards={cards}
-                currentUser={currentUser}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
-                onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddCard={handleAddCardClick}
-                onCardClick={handleCardClick}
-              />
+              >
+                <Main
+                  cards={cards}
+                  currentUser={currentUser}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                  onEditAvatar={handleEditAvatarClick}
+                  onEditProfile={handleEditProfileClick}
+                  onAddCard={handleAddCardClick}
+                  onCardClick={handleCardClick}
+                />
+              </ProtectedRoute>
+
               <Route path="/sign-in">
                 <Login
+                  showResult={showResult}
                   handleLogin={handleLogin}
                 />
               </Route>
 
               <Route path="/sign-up">
-                <Register />
+                <Register
+                  showResult={showResult}
+                />
               </Route>
 
               <Route exact path="/">
@@ -233,6 +248,13 @@ function App({ history }) {
           card={selectedCard}
           onClose={closeAllPopups}
         />
+
+        <InfoTooltip
+          success={infoTooltipSuccess}
+          isOpen={infoTooltipPopupOpen}
+          onClose={closeAllPopups}
+        />
+
       </div>
     </CurrentUserContext.Provider>
   );
