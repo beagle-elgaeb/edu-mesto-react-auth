@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import api from "../utils/Api";
 import ProtectedRoute from "../utils/ProtectedRoute";
@@ -132,68 +132,66 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <BrowserRouter>
-        <div className="page">
+      <div className="page">
 
-          <div className="page__container">
-            <Header />
-            <main className="content">
+        <div className="page__container">
+          <Header />
+          <main className="content">
 
-              <Switch>
-                <ProtectedRoute
-                  path="/content"
-                  loggedIn={loggedIn}
-                  component={Main}
-                  cards={cards}
-                  currentUser={currentUser}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                  onEditAvatar={handleEditAvatarClick}
-                  onEditProfile={handleEditProfileClick}
-                  onAddCard={handleAddCardClick}
-                  onCardClick={handleCardClick}
-                />
-                <Route path="/sign-in">
-                  <Login />
-                </Route>
-                <Route path="/sign-up">
-                  <Register />
-                </Route>
-                <Route exact path="/">
-                  {loggedIn ? <Redirect to="/content" /> : <Redirect to="/sign-in" />}
-                </Route>
-              </Switch>
+            <Switch>
+              <ProtectedRoute
+                path="/content"
+                loggedIn={loggedIn}
+                component={Main}
+                cards={cards}
+                currentUser={currentUser}
+                onCardLike={handleCardLike}
+                onCardDelete={handleCardDelete}
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddCard={handleAddCardClick}
+                onCardClick={handleCardClick}
+              />
+              <Route path="/sign-in">
+                <Login />
+              </Route>
+              <Route path="/sign-up">
+                <Register />
+              </Route>
+              <Route exact path="/">
+                {loggedIn ? <Redirect to="/content" /> : <Redirect to="/sign-in" />}
+              </Route>
+            </Switch>
 
-            </main>
-            <Footer />
-          </div>
-
-          {currentUser.name &&
-            <EditProfilePopup
-              onUpdateUser={handleUpdateUser}
-              isOpen={editProfilePopupOpen}
-              onClose={closeAllPopups}
-            />
-          }
-
-          <EditAvatarPopup
-            onUpdateAvatar={handleUpdateAvatar}
-            isOpen={editAvatarPopupOpen}
-            onClose={closeAllPopups}
-          />
-
-          <AddPlacePopup
-            onAddPlace={handleAddPlaceSubmit}
-            isOpen={addCardPopupOpen}
-            onClose={closeAllPopups}
-          />
-
-          <ImagePopup
-            card={selectedCard}
-            onClose={closeAllPopups}
-          />
+          </main>
+          <Footer />
         </div>
-      </BrowserRouter>
+
+        {currentUser.name &&
+          <EditProfilePopup
+            onUpdateUser={handleUpdateUser}
+            isOpen={editProfilePopupOpen}
+            onClose={closeAllPopups}
+          />
+        }
+
+        <EditAvatarPopup
+          onUpdateAvatar={handleUpdateAvatar}
+          isOpen={editAvatarPopupOpen}
+          onClose={closeAllPopups}
+        />
+
+        <AddPlacePopup
+          onAddPlace={handleAddPlaceSubmit}
+          isOpen={addCardPopupOpen}
+          onClose={closeAllPopups}
+        />
+
+        <ImagePopup
+          card={selectedCard}
+          onClose={closeAllPopups}
+        />
+      </div>
     </CurrentUserContext.Provider>
   );
 }
