@@ -1,13 +1,11 @@
 import React from "react";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import PropTypes from 'prop-types';
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import PropTypes from "prop-types";
 
 import PopupWithForm from "./PopupWithForm";
 
 function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
-
-
   const formik = useFormik({
     initialValues: {
       title: "",

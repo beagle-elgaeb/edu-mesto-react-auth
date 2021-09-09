@@ -47,6 +47,9 @@
   @import url(./blocks/card/__button-like-img/_wait/card__button-like-img_wait.css);
   @import url(./blocks/card/__button-like-count/card__button-like-count.css);
 
+/* Register */
+@import url(./blocks/register/register.css);
+
 /* Footer */
 @import url(./blocks/footer/footer.css);
   @import url(./blocks/footer/__copyright/footer__copyright.css);

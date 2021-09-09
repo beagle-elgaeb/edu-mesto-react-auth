@@ -1,0 +1,19 @@
+.register {
+  width: 100%;
+}
+
+.register__title {
+  text-align: center;
+}
+
+.register__form {
+  width: 100%;
+}
+
+.register__input {
+  width: 100%;
+}
+
+.register__button {
+  width: 100%;
+}

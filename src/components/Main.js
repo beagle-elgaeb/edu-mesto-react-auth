@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import Card from "./Card";
 
@@ -9,7 +9,7 @@ import buttonAddCard from "../images/button-add.svg";
 
 function Main({ cards, currentUser, onEditProfile, onEditAvatar, onAddCard, onCardClick, onCardLike, onCardDelete }) {
   return (
-    <main className="content">
+    <>
       <section className="profile">
         <button className="profile__button-edit-avatar profile__button-edit-avatar-overlay" onClick={onEditAvatar}>
           <img className="profile__avatar" src={currentUser.avatar ?? loader} alt="Фото профиля" />
@@ -40,7 +40,7 @@ function Main({ cards, currentUser, onEditProfile, onEditAvatar, onAddCard, onCa
           ))}
         </ul>
       </section>
-    </main>
+    </>
   );
 }
 

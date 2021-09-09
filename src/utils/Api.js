@@ -105,7 +105,7 @@ const api = new Api(
     groupID: "cohort-26",
     headers: {
       authorization: "05288f01-26d1-4add-96c0-b100674c662e",
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     }
   });
 
