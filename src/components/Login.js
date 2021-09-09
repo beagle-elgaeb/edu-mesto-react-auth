@@ -1,14 +1,24 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { useFormik } from "formik";
 
-function Login() {
+import * as auth from "../utils/Auth.js";
+
+function Login({ handleLogin, history }) {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      console.log(values.email);
+      auth.authorize({
+        email: values.email,
+        password: values.password,
+      });
+
+      handleLogin();
+
+      history.push("/content");
     },
   });
 
@@ -39,4 +49,4 @@ function Login() {
   )
 }
 
-export default Login;
+export default withRouter(Login);

@@ -43,11 +43,13 @@
   height: 27px;
   background: #000000;
   box-sizing: border-box;
+  outline: none;
   border: none;
   border-bottom: 2px solid #CCCCCC;
   line-height: 17px;
   font-size: 14px;
   font-weight: 500;
+  color: #ffffff;
   margin: 0 0 30px;
 }
 

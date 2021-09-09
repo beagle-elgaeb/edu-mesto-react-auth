@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { useFormik } from "formik";
 
 import * as auth from "../utils/Auth.js";
 
-function Register() {
+function Register({ history }) {
+  const [message, setMessage] = React.useState("")
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -15,6 +17,14 @@ function Register() {
         email: values.email,
         password: values.password,
       })
+        .then((res) => {
+          if (res) {
+            setMessage("Всё ок");
+            history.push("/sign-in");
+          } else {
+            setMessage("Что-то пошло не так!");
+          }
+        });
     },
   });
 
@@ -43,4 +53,4 @@ function Register() {
   )
 }
 
-export default Register;
+export default withRouter(Register);

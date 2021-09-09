@@ -1,8 +1,9 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 
 import api from "../utils/Api";
 import ProtectedRoute from "../utils/ProtectedRoute";
+import * as auth from "../utils/Auth.js";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -21,7 +22,7 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import "../index.css";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
-function App() {
+function App({ history }) {
   const [editAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [editProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [addCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
@@ -29,6 +30,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
+
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
     Promise.all([
@@ -131,7 +134,28 @@ function App() {
       })
   }
 
-  const { pathname } = useLocation();
+  const [userData, setUserData] = React.useState("");
+
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      auth.getContent(token)
+        .then((res) => {
+          if (res) {
+            setUserData(res.email);
+            setLoggedIn(true);
+            history.push("/content");
+          }
+        });
+    }
+  });
+
+  function handleLogin(e) {
+    e.preventDefault();
+    setLoggedIn(true);
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -140,6 +164,7 @@ function App() {
         <div className="page__container">
           <Header
             pageType={pathname}
+            userData={userData}
           />
           <main className="content">
 
@@ -158,7 +183,9 @@ function App() {
                 onCardClick={handleCardClick}
               />
               <Route path="/sign-in">
-                <Login />
+                <Login
+                  handleLogin={handleLogin}
+                />
               </Route>
 
               <Route path="/sign-up">
@@ -203,4 +230,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);
