@@ -1,8 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 
 import * as auth from "../utils/Auth.js";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 function Register() {
   const formik = useFormik({
@@ -38,7 +38,7 @@ function Register() {
           required />
         <button className="register__button" type="submit" aria-label="Зарегистрироваться">Зарегистрироваться</button>
       </form>
-      <p className="register__question">Уже зарешистрирвоаны? <Link className="register__link">Войти</Link></p>
+      <p className="register__question">Уже зарегистрированы? <Link className="register__link" to="/sign-in">Войти</Link></p>
     </section>
   )
 }

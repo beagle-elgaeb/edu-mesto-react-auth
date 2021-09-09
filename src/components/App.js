@@ -19,6 +19,7 @@ import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 import "../index.css";
+import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   const [editAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
@@ -130,12 +131,16 @@ function App() {
       })
   }
 
+  const { pathname } = useLocation();
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
         <div className="page__container">
-          <Header />
+          <Header
+            pageType={pathname}
+          />
           <main className="content">
 
             <Switch>
@@ -159,7 +164,7 @@ function App() {
               <Route path="/sign-up">
                 <Register />
               </Route>
-              
+
               <Route exact path="/">
                 {loggedIn ? <Redirect to="/content" /> : <Redirect to="/sign-in" />}
               </Route>

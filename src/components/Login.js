@@ -1,8 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
 
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-
 function Login() {
   const formik = useFormik({
     initialValues: {
@@ -16,7 +14,7 @@ function Login() {
 
   return (
     <section className="login">
-      <h1 className="login__title">Регистрация</h1>
+      <h1 className="login__title">Вход</h1>
       <form className="login__form" name="login" onSubmit={formik.handleSubmit}>
         <fieldset className="login__fieldset">
           <input
