@@ -14,11 +14,14 @@ function Login({ handleLogin, history }) {
       auth.authorize({
         email: values.email,
         password: values.password,
-      });
-
-      handleLogin();
-
-      history.push("/content");
+      })
+        .then((token) => {
+          if (token) {
+            localStorage.setItem("token", token);
+            handleLogin(token);
+            history.push("/content");
+          }
+        })
     },
   });
 

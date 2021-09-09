@@ -136,25 +136,32 @@ function App({ history }) {
 
   const [userData, setUserData] = React.useState("");
 
+  function loadProfile(token) {
+    auth.getContent(token)
+      .then((res) => {
+        if (res) {
+          setUserData(res.data.email);
+          setLoggedIn(true);
+          history.push("/content");
+        }
+      });
+  }
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
 
     if (token) {
-      auth.getContent(token)
-        .then((res) => {
-          if (res) {
-            setUserData(res.email);
-            setLoggedIn(true);
-            history.push("/content");
-          }
-        });
+      loadProfile(token);
     }
-  });
+  }, []);
 
-  function handleLogin(e) {
-    e.preventDefault();
-    setLoggedIn(true);
+  function handleLogin(token) {
+    loadProfile(token);
+  }
+
+  function handleLogout() {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
   }
 
   return (
@@ -165,6 +172,7 @@ function App({ history }) {
           <Header
             pageType={pathname}
             userData={userData}
+            handleLogout={handleLogout}
           />
           <main className="content">
 

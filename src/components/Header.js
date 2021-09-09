@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 
 import logo from "../images/logo.svg";
 
-function Header({ pageType, userData, history }) {
+function Header({ pageType, userData, handleLogout }) {
   let headerUserEmail = "";
   let headerLinkName;
   let headerLink;
@@ -13,15 +13,17 @@ function Header({ pageType, userData, history }) {
     headerLink = "/sign-up"
   } else if (pageType === "/sign-up") {
     headerLinkName = "Войти";
+    headerLink = "/sign-in"
   } else if (pageType === "/content") {
-    headerUserEmail=userData;
+    headerUserEmail = userData;
     headerLinkName = "Выйти";
     headerLink = "/sign-in"
   }
 
   function signOut() {
-    localStorage.removeItem("token");
-    history.push("/sign-in");
+    if (pageType === "/content") {
+      handleLogout();
+    }
   }
 
   return (
@@ -29,7 +31,7 @@ function Header({ pageType, userData, history }) {
       <a className="logo" href="/">
         <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
       </a>
-      <p>{headerUserEmail}</p><Link className="header__link" onClick={signOut}>{headerLinkName}</Link>
+      <p className="header__mail">{headerUserEmail}<Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link></p>
     </header>
   );
 }

@@ -13,6 +13,7 @@
 /* Header */
 @import url(./blocks/header/header.css);
 @import url(./blocks/header/__link/header__link.css);
+@import url(./blocks/header/__mail/header__mail.css);
 
 /* Profile */
 @import url(./blocks/profile/profile.css);
