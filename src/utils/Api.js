@@ -6,52 +6,48 @@ class Api {
   }
 
   getInitialCards() {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/cards`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/cards`, {
       headers: {
         authorization: this._headers.authorization
       }
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   getProfileData() {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/users/me`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/users/me`, {
       headers: {
         authorization: this._headers.authorization
       }
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   setAvatar(avatar) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/users/me/avatar`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         avatar: avatar
       })
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   setProfileData(name, about) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/users/me`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name,
         about
       })
-    }) 
-
-    return this._handleResult(promise);
+    })
+      .then(this._handleResult);
   }
 
   createCard(name, link) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/cards`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -59,43 +55,36 @@ class Api {
         link
       })
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   removeCard(id) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/cards/${id}`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   likeCard(id) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/cards/likes/${id}`, {
       method: "PUT",
       headers: this._headers
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
   unlikeCard(id) {
-    const promise = fetch(`${this._baseUrl}/${this._groupID}/cards/likes/${id}`, {
+    return fetch(`${this._baseUrl}/${this._groupID}/cards/likes/${id}`, {
       method: "DELETE",
       headers: this._headers
     })
-
-    return this._handleResult(promise);
+      .then(this._handleResult);
   }
 
-  _handleResult(promise) {
-    return promise
-      .then(res => {
-        if (res.ok) { return res.json() }
-        return Promise.reject(`Статут ошибки: ${res.status}`);
-      })
+  _handleResult(res) {
+    if (res.ok) { return res.json() }
+    return Promise.reject(`Статут ошибки: ${res.status}`);
   }
 }
 
@@ -109,4 +98,4 @@ const api = new Api(
     }
   });
 
-  export default api;
+export default api;
