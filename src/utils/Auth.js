@@ -25,7 +25,13 @@ export const authorize = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error("Ошибка авторизации");
+      }
+    })
     .then((data) => {
       if (data.token) {
         return data.token;
@@ -33,7 +39,6 @@ export const authorize = ({ email, password }) => {
         return;
       }
     })
-    .catch((err) => console.log(err));
 }
 
 export const getContent = (token) => {

@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 
 import * as auth from "../utils/Auth.js";
 
-function Login({ handleLogin, history }) {
+function Login({ handleLogin, showResult, history }) {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -22,6 +22,9 @@ function Login({ handleLogin, history }) {
             history.push("/content");
           }
         })
+        .catch(() => {
+          showResult(false);
+        });
     },
   });
 
