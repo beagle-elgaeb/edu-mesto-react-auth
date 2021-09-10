@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import logo from "../images/logo.svg";
 import butonProfileData from "../images/button-profile.svg";
+import buttonCloseProfileData from "../images/button-сlose-profile.svg";
 
 function Header({ loggedIn, pageType, userData, handleLogout }) {
   const [headerMobile, setHeaderMobile] = React.useState(true);
@@ -52,23 +53,41 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
     }
   }
 
+  const [openedProfileData, setOpenedProfileData] = React.useState(false);
+
+  function handleOpenProfileData() {
+    setOpenedProfileData(state => !state);
+  }
+
   return (
-    <header className="header">
-      <a className="logo" href="/">
-        <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
-      </a>
+    <>
       {
-        headerMobile
-          ?
-          <button className="header__buton-profile-data">
-            <img className="header__buton-profile-data-img" src={butonProfileData} alt="Регистрационные данные пользователя"/>
-          </button>
-          :
-          <p className="header__mail">{headerUserEmail}
-            <Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
-          </p>
+        headerMobile && loggedIn
+        &&
+        <div className={`header__profile-data ${!openedProfileData ? "header__profile-data_disabled" : ""}`}>
+          <p className="header__profile-data-mail">{headerUserEmail}</p>
+          <Link className="header__profile-data-link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
+        </div>
       }
-    </header>
+      <header className="header">
+        <a className="logo" href="/">
+          <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
+        </a>
+        {
+         loggedIn && headerMobile
+            ?
+
+              <button className="header__buton-profile-data" onClick={handleOpenProfileData}>
+                <img className="header__buton-profile-data-img" src={!openedProfileData ? butonProfileData : buttonCloseProfileData} alt="Регистрационные данные пользователя" />
+              </button>
+            :
+            <p className="header__mail">{headerUserEmail}
+              <Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
+            </p>
+
+        }
+      </header>
+    </>
   );
 }
 

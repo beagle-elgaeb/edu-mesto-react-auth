@@ -1,0 +1,13 @@
+.header__profile-data-link {
+  color: #A9A9A9;
+  text-decoration: none;
+  line-height: 22px;
+  font-size: 18px;
+  font-weight: 400;
+  transition: opacity 0.5s ease-out;
+  margin: 0 0 40px 0;
+}
+
+.header__profile-data-link:hover {
+  opacity: .85;
+}
