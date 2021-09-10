@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import api from "../utils/Api";
 import ProtectedRoute from "../utils/ProtectedRoute";
@@ -182,6 +183,7 @@ function App({ history }) {
             pageType={pathname}
             userData={userData}
             handleLogout={handleLogout}
+            loggedIn={loggedIn}
           />
           <main className="content">
 
@@ -258,6 +260,10 @@ function App({ history }) {
       </div>
     </CurrentUserContext.Provider>
   );
+}
+
+App.propTypes = {
+  history: PropTypes.object.isRequired,
 }
 
 export default withRouter(App);

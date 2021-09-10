@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { useFormik } from "formik";
+import PropTypes from "prop-types";
 
 import * as auth from "../utils/Auth.js";
 
@@ -53,6 +54,12 @@ function Login({ handleLogin, showResult, history }) {
     </section>
 
   )
+}
+
+Login.propTypes = {
+  history: PropTypes.object.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  showResult: PropTypes.func.isRequired,
 }
 
 export default withRouter(Login);

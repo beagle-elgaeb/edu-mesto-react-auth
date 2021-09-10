@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useFormik } from "formik";
+import PropTypes from "prop-types";
 
 import * as auth from "../utils/Auth.js";
 
@@ -49,6 +50,11 @@ function Register({ history, showResult }) {
       <p className="register__question">Уже зарегистрированы? <Link className="register__link" to="/sign-in">Войти</Link></p>
     </section>
   )
+}
+
+Register.propTypes = {
+  history: PropTypes.object.isRequired,
+  showResult: PropTypes.func.isRequired,
 }
 
 export default withRouter(Register);

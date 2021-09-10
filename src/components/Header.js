@@ -1,9 +1,10 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import logo from "../images/logo.svg";
 
-function Header({ pageType, userData, handleLogout }) {
+function Header({ loggedIn, pageType, userData, handleLogout }) {
   let headerUserEmail = "";
   let headerLinkName;
   let headerLink;
@@ -18,6 +19,15 @@ function Header({ pageType, userData, handleLogout }) {
     headerUserEmail = userData;
     headerLinkName = "Выйти";
     headerLink = "/sign-in"
+  } else if (pageType === "/") {
+    if (loggedIn) {
+      headerUserEmail = userData;
+      headerLinkName = "Выйти";
+      headerLink = "/sign-in"
+    } else {
+      headerLinkName = "Регистрация";
+      headerLink = "/sign-up"
+    }
   }
 
   function signOut() {
@@ -34,6 +44,13 @@ function Header({ pageType, userData, handleLogout }) {
       <p className="header__mail">{headerUserEmail}<Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link></p>
     </header>
   );
+}
+
+Header.propTypes = {
+  loggedIn: PropTypes.bool.isRequired,
+  pageType: PropTypes.string.isRequired,
+  userData: PropTypes.string.isRequired,
+  handleLogout: PropTypes.func.isRequired,
 }
 
 export default withRouter(Header);
