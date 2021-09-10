@@ -52,7 +52,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
           {...formik.getFieldProps("fullName")}
           placeholder="Ваше имя"
         />
-        <span className="popup__error name-input-error">
+        <span className="popup__error">
           {formik.touched.fullName && formik.errors.fullName ? formik.errors.fullName : null}
         </span>
 
@@ -65,7 +65,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
           required
           minLength={2}
           maxLength={200} />
-        <span className="popup__error name-input-error">
+        <span className="popup__error">
           {formik.touched.profession && formik.errors.profession ? formik.errors.profession : null}
         </span>
 

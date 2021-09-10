@@ -75,7 +75,7 @@
   @import url(./blocks/popup/__button-delete/popup__button-delete.css);
   @import url(./blocks/popup/__button-close/popup__button-close.css);
   @import url(./blocks/popup/__button-close-img/popup__button-close-img.css);
-    @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
+    @import url(./blocks/popup/__error/popup__error.css);
   @import url(./blocks/popup/__container-pic/popup__container-pic.css);
     @import url(./blocks/popup/__pic/popup__pic.css);
   @import url(./blocks/popup/__container-error/popup__container-error.css);

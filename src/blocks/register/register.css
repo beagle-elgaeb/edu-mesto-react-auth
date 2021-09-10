@@ -16,14 +16,14 @@
   line-height: 29px;
   font-size: 24px;
   font-weight: 900;
-  margin: 60px 0 50px;
+  margin: 60px 0 20px;
 }
 
 @media screen and (max-width: 680px) {
   .register__title {
     line-height: 24px;
     font-size: 20px;
-    margin: 40px 0;
+    margin: 40px 0 10px;
   }
 }
 
@@ -32,16 +32,18 @@
 }
 
 .register__fieldset {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: none;
   margin: 0;
   padding: 0;
 }
 
 .register__input {
-  width: 100%;
+  width: 358px;
   height: 27px;
-  background: #000000;
+  background: transparent;
   box-sizing: border-box;
   outline: none;
   border: none;
@@ -50,12 +52,39 @@
   font-size: 14px;
   font-weight: 500;
   color: #ffffff;
-  margin: 0 0 30px;
+  margin: 30px 0 0;
+}
+
+@media screen and (max-width: 680px) {
+  .register__input {
+    width: 260px;
+  }
 }
 
 ::placeholder {
   color: #CCCCCC;
   font-weight: 400;
+}
+
+.register__error {
+  width: 358px;
+  height: 0;
+  display: inline-block;
+  line-height: 13px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ff0000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 auto -13px auto;
+  padding-bottom: 13px;
+}
+
+@media screen and (max-width: 680px) {
+  .register__error {
+    width: 260px;
+  }
 }
 
 .register__button {

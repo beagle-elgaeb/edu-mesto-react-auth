@@ -63,7 +63,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
           {...formik.getFieldProps("pic")}
           placeholder="Ссылка на картинку"
         />
-                <span className="popup__error">
+        <span className="popup__error">
           {formik.touched.pic && formik.errors.pic ? formik.errors.pic : null}
         </span>
       </fieldset>
