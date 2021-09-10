@@ -81,7 +81,7 @@ function Register({ history, showResult }) {
               {...formik.getFieldProps("password")}
               placeholder="Пароль" />
             <button className="register__eye" onClick={changeButtonPass}>
-              <img src={!visiblePass ? eyeClose : eyeOpen} alt={!visiblePass ? "Пароль скрыт" : "Пароль показан"} />
+              <img className="register__eye-img" src={!visiblePass ? eyeClose : eyeOpen} alt={!visiblePass ? "Пароль скрыт" : "Пароль показан"} />
             </button>
           </div>
           <span className="register__error">
@@ -95,7 +95,7 @@ function Register({ history, showResult }) {
               {...formik.getFieldProps("confirmPassword")}
               placeholder="Повторите пароль" />
             <button className="register__eye" onClick={changeButtonConfirmPass}>
-              <img src={!visibleConfirmPass ? eyeClose : eyeOpen} alt={!visibleConfirmPass ? "Пароль скрыт" : "Пароль показан"} />
+              <img className="register__eye-img" src={!visibleConfirmPass ? eyeClose : eyeOpen} alt={!visibleConfirmPass ? "Пароль скрыт" : "Пароль показан"} />
             </button>
           </div>
           <span className="register__error">

@@ -8,9 +8,12 @@ import imageErr from "../images/icon-err.svg";
 function InfoTooltip({ success, isOpen, onClose, onKeydown }) {
 
   React.useEffect(() => {
-    if (!isOpen) { return }
-    document.addEventListener("keydown", onKeydown)
-    return () => document.removeEventListener("keydown", onKeydown)
+    if (!isOpen) {
+      return;
+    }
+
+    document.addEventListener("keydown", onKeydown);
+    return () => document.removeEventListener("keydown", onKeydown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 

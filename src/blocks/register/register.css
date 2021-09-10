@@ -79,12 +79,9 @@
 }
 
 .register__eye {
-  width: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 22px;
   position: absolute;
-  bottom: 5px;
+  bottom: 0px;
   right: 10px;
   background: transparent;
   border: none;
@@ -98,6 +95,10 @@
 
 .register__eye:hover {
   opacity: .4;
+}
+
+.register__eye-img {
+  width: 100%;
 }
 
 .register__error {

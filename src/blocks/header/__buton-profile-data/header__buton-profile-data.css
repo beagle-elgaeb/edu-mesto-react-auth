@@ -1,0 +1,20 @@
+.header__buton-profile-data {
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: opacity 0.5s ease-out;
+  margin: 8px 0 0 0;
+  padding: 0;
+}
+
+.header__buton-profile-data:hover {
+  opacity: .85;
+}
+
+@media screen and (max-width: 680px) {
+  .header__buton-profile-data {
+    margin: 0 19px 28px 0;
+  }
+}

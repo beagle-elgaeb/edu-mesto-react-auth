@@ -3,30 +3,38 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import logo from "../images/logo.svg";
+import butonProfileData from "../images/button-profile.svg";
 
 function Header({ loggedIn, pageType, userData, handleLogout }) {
+  const [headerMobile, setHeaderMobile] = React.useState(true);
+
   let headerUserEmail = "";
   let headerLinkName;
   let headerLink;
 
+  React.useEffect(() => {
+    window.addEventListener("resize", onСhangedScreenWidth);
+    return () => document.removeEventListener("resize", onСhangedScreenWidth);
+  })
+
   if (pageType === "/sign-in") {
     headerLinkName = "Регистрация";
-    headerLink = "/sign-up"
+    headerLink = "/sign-up";
   } else if (pageType === "/sign-up") {
     headerLinkName = "Войти";
-    headerLink = "/sign-in"
+    headerLink = "/sign-in";
   } else if (pageType === "/content") {
     headerUserEmail = userData;
     headerLinkName = "Выйти";
-    headerLink = "/sign-in"
+    headerLink = "/sign-in";
   } else if (pageType === "/") {
     if (loggedIn) {
       headerUserEmail = userData;
       headerLinkName = "Выйти";
-      headerLink = "/sign-in"
+      headerLink = "/sign-in";
     } else {
       headerLinkName = "Регистрация";
-      headerLink = "/sign-up"
+      headerLink = "/sign-up";
     }
   }
 
@@ -36,12 +44,30 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
     }
   }
 
+  function onСhangedScreenWidth(e) {
+    if (e.target.innerWidth <= 680) {
+      setHeaderMobile(true);
+    } else if (e.target.innerWidth > 680) {
+      setHeaderMobile(false);
+    }
+  }
+
   return (
     <header className="header">
       <a className="logo" href="/">
         <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
       </a>
-      <p className="header__mail">{headerUserEmail}<Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link></p>
+      {
+        headerMobile
+          ?
+          <button className="header__buton-profile-data">
+            <img className="header__buton-profile-data-img" src={butonProfileData} alt="Регистрационные данные пользователя"/>
+          </button>
+          :
+          <p className="header__mail">{headerUserEmail}
+            <Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
+          </p>
+      }
     </header>
   );
 }

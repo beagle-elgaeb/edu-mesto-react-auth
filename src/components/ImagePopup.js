@@ -6,9 +6,12 @@ import buttonClosePopup from "../images/button-сlose.svg";
 function ImagePopup({ card, isOpen, onClose, onKeydown }) {
 
   React.useEffect(() => {
-    if (!isOpen) { return }
-    document.addEventListener("keydown", onKeydown)
-    return () => document.removeEventListener("keydown", onKeydown)
+    if (!isOpen) {
+      return;
+    }
+
+    document.addEventListener("keydown", onKeydown);
+    return () => document.removeEventListener("keydown", onKeydown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 

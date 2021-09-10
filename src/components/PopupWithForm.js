@@ -11,9 +11,12 @@ function PopupWithForm({ title, name, buttonText, children, isOpen, disabledSubm
   }, [isOpen]);
 
   React.useEffect(() => {
-    if (!isOpen) { return }
-    document.addEventListener("keydown", onKeydown)
-    return () => document.removeEventListener("keydown", onKeydown)
+    if (!isOpen) {
+      return;
+    }
+
+    document.addEventListener("keydown", onKeydown);
+    return () => document.removeEventListener("keydown", onKeydown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
 
