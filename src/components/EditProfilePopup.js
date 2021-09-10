@@ -7,7 +7,7 @@ import PopupWithForm from "./PopupWithForm";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
+function EditProfilePopup({ onUpdateUser, isOpen, onClose, onKeydown }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const formik = useFormik({
@@ -41,6 +41,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
       onSubmit={formik.handleSubmit}
       isOpen={isOpen}
       onClose={onClose}
+      onKeydown={onKeydown}
       disabledSubmit={!formik.isValid}
     >
       <fieldset className="popup__fieldset">
@@ -76,6 +77,7 @@ EditProfilePopup.propTypes = {
   onUpdateUser: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default EditProfilePopup;

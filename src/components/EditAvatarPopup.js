@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
+function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose, onKeydown }) {
   const formik = useFormik({
     initialValues: {
       avatar: "",
@@ -35,6 +35,7 @@ function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
       onSubmit={formik.handleSubmit}
       isOpen={isOpen}
       onClose={onClose}
+      onKeydown={onKeydown}
       disabledSubmit={!formik.isValid}
     >
       <fieldset className="popup__fieldset">
@@ -57,6 +58,7 @@ EditAvatarPopup.propTypes = {
   onUpdateAvatar: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default EditAvatarPopup;

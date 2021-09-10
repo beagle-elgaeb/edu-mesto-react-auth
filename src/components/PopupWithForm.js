@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import buttonClosePopup from "../images/button-сlose.svg";
 
-function PopupWithForm({ title, name, buttonText, children, isOpen, disabledSubmit, onSubmit, onClose }) {
+function PopupWithForm({ title, name, buttonText, children, isOpen, disabledSubmit, onSubmit, onClose, onKeydown }) {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
   React.useEffect(() => {
@@ -22,12 +22,6 @@ function PopupWithForm({ title, name, buttonText, children, isOpen, disabledSubm
 
     onSubmit();
     setIsSubmit(true);
-  }
-
-  function onKeydown({ key }) {
-    if (key === "Escape") {
-      onClose();
-    }
   }
 
   return (
@@ -57,6 +51,7 @@ PopupWithForm.propTypes = {
   disabledSubmit: PropTypes.bool.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default PopupWithForm;

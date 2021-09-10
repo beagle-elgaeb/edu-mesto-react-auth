@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
+function AddPlacePopup({ onAddPlace, isOpen, onClose, onKeydown }) {
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -41,6 +41,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
       onSubmit={formik.handleSubmit}
       isOpen={isOpen}
       onClose={onClose}
+      onKeydown={onKeydown}
       disabledSubmit={!formik.isValid}
     >
       <fieldset className="popup__fieldset">
@@ -74,6 +75,7 @@ AddPlacePopup.propTypes = {
   onAddPlace: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default AddPlacePopup;

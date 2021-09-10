@@ -70,6 +70,14 @@
   font-weight: 400;
 }
 
+.register__input:-webkit-autofill,
+.register__input:-webkit-autofill:hover,
+.register__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #FFFFFF;
+  -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .register__eye {
   width: 18px;
   display: flex;

@@ -1,8 +1,16 @@
+import React from "react";
 import PropTypes from "prop-types";
 
 import buttonClosePopup from "../images/button-сlose.svg";
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({ card, isOpen, onClose, onKeydown }) {
+
+  React.useEffect(() => {
+    if (!isOpen) { return }
+    document.addEventListener("keydown", onKeydown)
+    return () => document.removeEventListener("keydown", onKeydown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
 
   return (
     <div className={`popup popup_type_pic ${card ? "popup_opened" : ""}`} onClick={onClose}>
@@ -19,7 +27,9 @@ function ImagePopup({ card, onClose }) {
 
 ImagePopup.propTypes = {
   card: PropTypes.object,
+  isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default ImagePopup;

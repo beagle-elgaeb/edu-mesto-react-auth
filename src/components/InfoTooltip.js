@@ -1,9 +1,18 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 import buttonClosePopup from "../images/button-сlose.svg";
 import imageOk from "../images/icon-ok.svg";
 import imageErr from "../images/icon-err.svg";
-import PropTypes from "prop-types";
 
-function InfoTooltip({ success, isOpen, onClose }) {
+function InfoTooltip({ success, isOpen, onClose, onKeydown }) {
+
+  React.useEffect(() => {
+    if (!isOpen) { return }
+    document.addEventListener("keydown", onKeydown)
+    return () => document.removeEventListener("keydown", onKeydown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
 
   return (
     <div className={`popup popup_type_tooltype ${isOpen ? "popup_opened" : ""} `} onClick={onClose}>
@@ -22,6 +31,7 @@ InfoTooltip.propTypes = {
   success: PropTypes.bool.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func.isRequired,
 }
 
 export default InfoTooltip;

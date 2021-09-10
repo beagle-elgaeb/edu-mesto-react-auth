@@ -86,6 +86,12 @@ function App({ history }) {
     setSelectedCard(undefined);
   }
 
+  function onKeydown({ key }) {
+    if (key === "Escape") {
+      closeAllPopups();
+    }
+  }
+
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -231,6 +237,7 @@ function App({ history }) {
             onUpdateUser={handleUpdateUser}
             isOpen={editProfilePopupOpen}
             onClose={closeAllPopups}
+            onKeydown={onKeydown}
           />
         }
 
@@ -238,23 +245,28 @@ function App({ history }) {
           onUpdateAvatar={handleUpdateAvatar}
           isOpen={editAvatarPopupOpen}
           onClose={closeAllPopups}
+          onKeydown={onKeydown}
         />
 
         <AddPlacePopup
           onAddPlace={handleAddPlaceSubmit}
           isOpen={addCardPopupOpen}
           onClose={closeAllPopups}
+          onKeydown={onKeydown}
         />
 
         <ImagePopup
           card={selectedCard}
+          isOpen={infoTooltipPopupOpen}
           onClose={closeAllPopups}
+          onKeydown={onKeydown}
         />
 
         <InfoTooltip
           success={infoTooltipSuccess}
           isOpen={infoTooltipPopupOpen}
           onClose={closeAllPopups}
+          onKeydown={onKeydown}
         />
 
       </div>
