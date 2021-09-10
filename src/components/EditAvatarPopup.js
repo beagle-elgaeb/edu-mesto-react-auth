@@ -44,7 +44,7 @@ function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose }) {
           type="url"
           {...formik.getFieldProps("avatar")}
           placeholder="Ссылка на аватар"
-          required />
+        />
         <span className="popup__error">
           {formik.touched.avatar && formik.errors.avatar ? formik.errors.avatar : null}
         </span>

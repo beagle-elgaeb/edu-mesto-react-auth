@@ -55,7 +55,6 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose }) {
           {formik.touched.title && formik.errors.title ? formik.errors.title : null}
         </span>
 
-
         <input
           id="url-pic-input"
           className="popup__input popup__input_url_pic"

@@ -62,9 +62,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose }) {
           type="text"
           {...formik.getFieldProps("profession")}
           placeholder="Ваша профессия"
-          required
-          minLength={2}
-          maxLength={200} />
+        />
         <span className="popup__error">
           {formik.touched.profession && formik.errors.profession ? formik.errors.profession : null}
         </span>
