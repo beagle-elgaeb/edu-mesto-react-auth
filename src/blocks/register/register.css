@@ -40,6 +40,10 @@
   padding: 0;
 }
 
+.register__pass-input {
+  position: relative;
+}
+
 .register__input {
   width: 358px;
   height: 27px;
@@ -64,6 +68,28 @@
 ::placeholder {
   color: #CCCCCC;
   font-weight: 400;
+}
+
+.register__eye {
+  width: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  opacity: .6;
+  transition: opacity 0.5s ease-out;
+  margin: 0;
+  padding: 0;
+}
+
+.register__eye:hover {
+  opacity: .4;
 }
 
 .register__error {
@@ -96,7 +122,9 @@
   line-height: 22px;
   font-size: 18px;
   color: #000000;
-  margin: 216px 0 0;
+  outline: none;
+  transition: opacity 0.5s ease-out;
+  margin: 159px 0 0;
 }
 
 .register__button:hover {
@@ -109,7 +137,7 @@
     line-height: 19px;
     font-size: 16px;
     color: #000000;
-    margin: 173px 0 0;
+    margin: 116px 0 0;
   }
 }
 

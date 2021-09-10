@@ -3,5 +3,6 @@
   height: 19px;
   display: block;
   background: url(../../../images/like.svg);
+  outline: none;
   margin: 0;
 }

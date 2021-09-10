@@ -67,6 +67,8 @@
   line-height: 22px;
   font-size: 18px;
   color: #000000;
+  outline: none;
+  transition: opacity 0.5s ease-out;
   margin: 186px 0 0;
 }
 

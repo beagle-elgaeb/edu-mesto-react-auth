@@ -6,11 +6,15 @@ import PropTypes from "prop-types";
 
 import * as auth from "../utils/Auth.js";
 
+import eyeOpen from "../images/icon-eye-open.svg"
+import eyeClose from "../images/icon-eye-close.svg";
+
 function Register({ history, showResult }) {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
+      confirmPassword: "",
     },
     validationSchema: Yup.object({
       email: Yup.string()
@@ -23,22 +27,37 @@ function Register({ history, showResult }) {
         .matches(/^(?=.*[a-z])/, "Пароль должен содердать хотябы один символ нижнего регистра")
         .matches(/^(?=.*[0-9])/, "Пароль должен содердать хотябы одну цифру")
         .required("Введите, пожалуйста, пароль"),
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref("password"), null], "Пароли не совпадают")
+        .required("Введите пароль повторно, пожалуйста"),
     }),
     onSubmit: (values) => {
-      auth.register({
-        email: values.email,
-        password: values.password,
-      })
-        .then(() => {
-          showResult(true);
-          history.push("/sign-in");
+      if (values.password === values.confirmPassword) {
+        auth.register({
+          email: values.email,
+          password: values.password,
         })
-        .catch(() => {
-          showResult(false);
-        });
-
+          .then(() => {
+            showResult(true);
+            history.push("/sign-in");
+          })
+          .catch(() => {
+            showResult(false);
+          });
+      }
     },
   });
+
+  const [visiblePass, setVisibilityPass] = React.useState(false);
+  const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
+
+  function changeButtonPass() {
+    setVisibilityPass(state => !state);
+  }
+
+  function changeButtonConfirmPass() {
+    setVisibilityConfirmPass(state => !state);
+  }
 
   return (
     <section className="register">
@@ -54,14 +73,33 @@ function Register({ history, showResult }) {
           <span className="register__error">
             {formik.touched.email && formik.errors.email ? formik.errors.email : null}
           </span>
-          <input
-            id="register-input"
-            className="register__input"
-            type="password"
-            {...formik.getFieldProps("password")}
-            placeholder="Пароль" />
+          <div className="register__pass-input">
+            <input
+              id="register-input"
+              className="register__input"
+              type={!visiblePass ? "password" : "text"}
+              {...formik.getFieldProps("password")}
+              placeholder="Пароль" />
+            <button className="register__eye" onClick={changeButtonPass}>
+              <img src={!visiblePass ? eyeClose : eyeOpen} alt={!visiblePass ? "Пароль скрыт" : "Пароль показан"} />
+            </button>
+          </div>
           <span className="register__error">
             {formik.touched.password && formik.errors.password ? formik.errors.password : null}
+          </span>
+          <div className="register__pass-input">
+            <input
+              id="register-input"
+              className="register__input"
+              type={!visibleConfirmPass ? "password" : "text"}
+              {...formik.getFieldProps("confirmPassword")}
+              placeholder="Повторите пароль" />
+            <button className="register__eye" onClick={changeButtonConfirmPass}>
+              <img src={!visibleConfirmPass ? eyeClose : eyeOpen} alt={!visibleConfirmPass ? "Пароль скрыт" : "Пароль показан"} />
+            </button>
+          </div>
+          <span className="register__error">
+            {formik.touched.confirmPassword && formik.errors.confirmPassword ? formik.errors.confirmPassword : null}
           </span>
         </fieldset>
 

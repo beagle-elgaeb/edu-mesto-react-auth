@@ -11,6 +11,7 @@
   background-position: center;
   transition: opacity .3s linear, visibility .3s linear;
   z-index: 2;
+  outline: none;
   margin: 0;
 }
 

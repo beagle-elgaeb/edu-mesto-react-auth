@@ -10,11 +10,24 @@ function PopupWithForm({ title, name, buttonText, children, isOpen, disabledSubm
     setIsSubmit(false);
   }, [isOpen]);
 
+  React.useEffect(() => {
+    if (!isOpen) { return }
+    document.addEventListener("keydown", onKeydown)
+    return () => document.removeEventListener("keydown", onKeydown)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen])
+
   function handleSubmit(e) {
     e.preventDefault();
 
     onSubmit();
     setIsSubmit(true);
+  }
+
+  function onKeydown({ key }) {
+    if (key === "Escape") {
+      onClose();
+    }
   }
 
   return (

@@ -9,6 +9,7 @@
   border: none;
   cursor: pointer;
   transition: opacity 0.5s ease-out;
+  outline: none;
   margin: auto 18px auto 0;
 }
 

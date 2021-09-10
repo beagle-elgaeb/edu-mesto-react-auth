@@ -1,5 +1,6 @@
 .card__button-delete-img {
   width: 18px;
   height: 19.3px;
+  outline: none;
   margin: 0;
 }
