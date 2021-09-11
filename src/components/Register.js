@@ -65,7 +65,7 @@ function Register({ history, showResult }) {
       <form className="register__form" name="register" onSubmit={formik.handleSubmit}>
         <fieldset className="login__fieldset">
           <input
-            id="register-input"
+            id="register-input-email"
             className="register__input"
             type="email"
             {...formik.getFieldProps("email")}
@@ -75,7 +75,7 @@ function Register({ history, showResult }) {
           </span>
           <div className="register__pass-input">
             <input
-              id="register-input"
+              id="register-input-pass"
               className="register__input"
               type={!visiblePass ? "password" : "text"}
               {...formik.getFieldProps("password")}
@@ -89,7 +89,7 @@ function Register({ history, showResult }) {
           </span>
           <div className="register__pass-input">
             <input
-              id="register-input"
+              id="register-input-confirm-pass"
               className="register__input"
               type={!visibleConfirmPass ? "password" : "text"}
               {...formik.getFieldProps("confirmPassword")}

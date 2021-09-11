@@ -76,7 +76,6 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
         {
          loggedIn && headerMobile
             ?
-
               <button className="header__buton-profile-data" onClick={handleOpenProfileData}>
                 <img className="header__buton-profile-data-img" src={!openedProfileData ? butonProfileData : buttonCloseProfileData} alt="Регистрационные данные пользователя" />
               </button>

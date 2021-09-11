@@ -1,6 +1,0 @@
-.header__profile-data_disabled {
-  max-height: 0px;
-  display: block;
-  overflow: hidden;
-  transition: max-height 0.1ms linear;
-}

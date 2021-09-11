@@ -12,10 +12,11 @@ function Login({ handleLogin, showResult, history }) {
       password: "",
     },
     onSubmit: (values) => {
-      auth.authorize({
-        email: values.email,
-        password: values.password,
-      })
+      auth
+        .authorize({
+          email: values.email,
+          password: values.password,
+        })
         .then((token) => {
           if (token) {
             localStorage.setItem("token", token);
@@ -35,31 +36,34 @@ function Login({ handleLogin, showResult, history }) {
       <form className="login__form" name="login" onSubmit={formik.handleSubmit}>
         <fieldset className="login__fieldset">
           <input
-            id="login-input"
+            id="login-input-email"
             className="login__input"
             type="email"
             {...formik.getFieldProps("email")}
             placeholder="Email"
-            required />
+            required
+          />
           <input
-            id="login-input"
+            id="login-input-pass"
             className="login__input"
-            type="text"
+            type="password"
             {...formik.getFieldProps("password")}
             placeholder="Пароль"
-            required />
+            required
+          />
         </fieldset>
-        <button className="login__button" type="submit" aria-label="Войти">Войти</button>
+        <button className="login__button" type="submit" aria-label="Войти">
+          Войти
+        </button>
       </form>
     </section>
-
-  )
+  );
 }
 
 Login.propTypes = {
   history: PropTypes.object.isRequired,
   handleLogin: PropTypes.func.isRequired,
   showResult: PropTypes.func.isRequired,
-}
+};
 
 export default withRouter(Login);
