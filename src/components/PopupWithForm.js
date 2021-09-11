@@ -49,12 +49,12 @@ PopupWithForm.propTypes = {
   title: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   buttonText: PropTypes.string.isRequired,
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
   isOpen: PropTypes.bool.isRequired,
-  disabledSubmit: PropTypes.bool.isRequired,
+  disabledSubmit: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  onKeydown: PropTypes.func.isRequired,
+  onKeydown: PropTypes.func,
 }
 
 export default PopupWithForm;

@@ -17,6 +17,7 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import ImagePopup from "./ImagePopup";
+import ConfirmDeleteCardPopup from "./ConfirmDeleteCardPopup";
 import InfoTooltip from "./InfoTooltip";
 
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -30,7 +31,9 @@ function App({ history }) {
   const [addCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
   const [infoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
   const [infoTooltipSuccess, setInfoTooltipSuccess] = React.useState(false);
+
   const [selectedCard, setSelectedCard] = React.useState();
+  const [deletingCard, setDeletingCard] = React.useState();
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -73,6 +76,10 @@ function App({ history }) {
     setAddCardPopupOpen(true);
   }
 
+  function handleDeleteCardClick(card) {
+    setDeletingCard(card);
+  }
+
   function showResult(success) {
     setInfoTooltipPopupOpen(true);
     setInfoTooltipSuccess(success);
@@ -83,7 +90,9 @@ function App({ history }) {
     setEditProfilePopupOpen(false);
     setAddCardPopupOpen(false);
     setInfoTooltipPopupOpen(false);
+
     setSelectedCard(undefined);
+    setDeletingCard(undefined);
   }
 
   function onKeydown({ key }) {
@@ -139,7 +148,7 @@ function App({ history }) {
   function handleCardDelete(card) {
     setCards((state) => state.map((c) => c._id === card._id ? { ...c, deleteClicked: true } : c));
 
-    api.removeCard(card._id)
+    return api.removeCard(card._id)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
         setCards(newCards);
@@ -202,7 +211,7 @@ function App({ history }) {
                   cards={cards}
                   currentUser={currentUser}
                   onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
+                  onCardDelete={handleDeleteCardClick}
                   onEditAvatar={handleEditAvatarClick}
                   onEditProfile={handleEditProfileClick}
                   onAddCard={handleAddCardClick}
@@ -260,6 +269,13 @@ function App({ history }) {
           isOpen={infoTooltipPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
+        />
+
+        <ConfirmDeleteCardPopup
+          card={deletingCard}
+          onDelete={handleCardDelete}
+          isOpen={deletingCard !== undefined}
+          onClose={closeAllPopups}
         />
 
         <InfoTooltip

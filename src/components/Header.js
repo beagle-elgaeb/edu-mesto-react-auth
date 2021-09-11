@@ -17,7 +17,7 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   React.useEffect(() => {
     window.addEventListener("resize", onСhangedScreenWidth);
     return () => document.removeEventListener("resize", onСhangedScreenWidth);
-  })
+  }, [])
 
   if (pageType === "/sign-in") {
     headerLinkName = "Регистрация";
