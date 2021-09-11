@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  background-color: #ffffff;
+  background: #ffffff;
 }
 
 @media screen and (max-width: 680px) {
@@ -123,7 +123,7 @@
 .popup__input {
   width: 358px;
   height: 27px;
-  background-color: transparent;
+  background: transparent;
   border: 0;
   border-bottom: 1px solid #dddddd;
   outline: none;
@@ -190,7 +190,7 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  background-color: transparent;
+  background: transparent;
   border: none;
   cursor: pointer;
   transition: opacity 0.5s ease-out;

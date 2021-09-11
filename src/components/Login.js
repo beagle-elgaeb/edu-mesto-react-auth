@@ -5,13 +5,18 @@ import PropTypes from "prop-types";
 
 import * as auth from "../utils/Auth.js";
 
+import loader from "../images/loader.gif";
+
 function Login({ handleLogin, showResult, history }) {
+  const [isLogined, setIsLogined] = React.useState(false);
+
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
+      setIsLogined(true);
       auth
         .authorize({
           email: values.email,
@@ -21,11 +26,13 @@ function Login({ handleLogin, showResult, history }) {
           if (token) {
             localStorage.setItem("token", token);
             handleLogin(token);
+            setIsLogined(false);
             history.push("/content");
           }
         })
         .catch(() => {
           showResult(false);
+          setIsLogined(false);
         });
     },
   });
@@ -52,6 +59,17 @@ function Login({ handleLogin, showResult, history }) {
             required
           />
         </fieldset>
+
+        {isLogined && (
+          <div className="login__loadbar">
+            <img
+              className="login__loadbar-img"
+              src={loader}
+              alt="Вход"
+            />
+          </div>
+        )}
+
         <button className="login__button" type="submit" aria-label="Войти">
           Войти
         </button>
