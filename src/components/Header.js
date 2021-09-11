@@ -8,6 +8,7 @@ import buttonCloseProfileData from "../images/button-сlose-profile.svg";
 
 function Header({ loggedIn, pageType, userData, handleLogout }) {
   const [headerMobile, setHeaderMobile] = React.useState(true);
+  const [openedProfileData, setOpenedProfileData] = React.useState(false);
 
   let headerUserEmail = "";
   let headerLinkName;
@@ -42,6 +43,7 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   function signOut() {
     if (pageType === "/content") {
       handleLogout();
+      setOpenedProfileData(false);
     }
   }
 
@@ -52,8 +54,6 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
       setHeaderMobile(false);
     }
   }
-
-  const [openedProfileData, setOpenedProfileData] = React.useState(false);
 
   function handleOpenProfileData() {
     setOpenedProfileData(state => !state);

@@ -19,14 +19,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
   transition: max-height .5s ease-in-out;
 }
 
 .header__profile-data_disabled {
   max-height: 0px;
-  display: block;
   overflow: hidden;
-  transition: max-height 0.1ms linear;
+  transition: max-height .2s linear;
 }
 
 .header__mail {
