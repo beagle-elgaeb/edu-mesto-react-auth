@@ -1,6 +1,6 @@
 export const BASE_URL = "https://auth.nomoreparties.co";
 
-export const register = ({ email, password }) => {
+export function register({ email, password }) {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -8,16 +8,10 @@ export const register = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error("Ошибка регистрации");
-      }
-    })
+    .then(handleResult)
 };
 
-export const authorize = ({ email, password }) => {
+export function authorize({ email, password }) {
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
@@ -25,13 +19,7 @@ export const authorize = ({ email, password }) => {
     },
     body: JSON.stringify({ email, password })
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        throw new Error("Ошибка авторизации");
-      }
-    })
+    .then(handleResult)
     .then((data) => {
       if (data.token) {
         return data.token;
@@ -41,7 +29,7 @@ export const authorize = ({ email, password }) => {
     })
 }
 
-export const getContent = (token) => {
+export function getContent(token) {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
@@ -49,6 +37,10 @@ export const getContent = (token) => {
       "Authorization": `Bearer ${token}`
     }
   })
-    .then(res => res.json())
-    .catch((err) => console.log(err));
+    .then(handleResult)
+}
+
+function handleResult(res) {
+  if (res.ok) { return res.json() }
+  return Promise.reject(`Статут ошибки: ${res.status}`);
 }

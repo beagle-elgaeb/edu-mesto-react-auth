@@ -4,16 +4,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
 
-import * as auth from "../utils/Auth.js";
-
 import eyeOpen from "../images/icon-eye-open.svg";
 import eyeClose from "../images/icon-eye-close.svg";
 import loader from "../images/loader.gif";
 
-function Register({ history, showResult }) {
-const [isRegistered, setIsRegistered] = React.useState(false);
-const [visiblePass, setVisibilityPass] = React.useState(false);
-const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
+function Register({ isRegistered, registration }) {
+  const [visiblePass, setVisibilityPass] = React.useState(false);
+  const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -26,43 +23,27 @@ const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
         .email("Введите, пожулуйста, корректный email")
         .required("Введите, пожалуйста, email"),
       password: Yup.string()
-        .min(8, "Пароль не должно быть короче 8 символов")
-        .matches(
-          /^[a-zA-Z0-9]/,
-          "Пароль может сожержать только латинские символы"
-        )
-        .matches(
-          /^(?=.*[A-Z])/,
-          "Пароль должен содердать хотябы один символ верхнего регистра"
-        )
-        .matches(
-          /^(?=.*[a-z])/,
-          "Пароль должен содердать хотябы один символ нижнего регистра"
-        )
-        .matches(/^(?=.*[0-9])/, "Пароль должен содердать хотябы одну цифру")
+        .min(3, "Пароль не должно быть короче 3 символов")
+        // .matches(
+        //   /^[a-zA-Z0-9]/,
+        //   "Пароль может сожержать только латинские символы"
+        // )
+        // .matches(
+        //   /^(?=.*[A-Z])/,
+        //   "Пароль должен содержать хотябы один символ верхнего регистра"
+        // )
+        // .matches(
+        //   /^(?=.*[a-z])/,
+        //   "Пароль должен содержать хотябы один символ нижнего регистра"
+        // )
+        // .matches(/^(?=.*[0-9])/, "Пароль должен содержать хотябы одну цифру")
         .required("Введите, пожалуйста, пароль"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Пароли не совпадают")
         .required("Введите пароль повторно, пожалуйста"),
     }),
     onSubmit: (values) => {
-      setIsRegistered(true)
-      if (values.password === values.confirmPassword) {
-        auth
-          .register({
-            email: values.email,
-            password: values.password,
-          })
-          .then(() => {
-            showResult(true);
-            setIsRegistered(false);
-            history.push("/sign-in");
-          })
-          .catch(() => {
-            showResult(false);
-            setIsRegistered(false);
-          });
-      }
+      registration(values);
     },
   });
 
@@ -140,16 +121,15 @@ const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
         </fieldset>
 
         {isRegistered
-        &&
-        <div className="register__loadbar">
-          <img className="register__loadbar-img" src={loader} alt="Регистрация" />
-        </div>
+          &&
+          <div className="register__loadbar">
+            <img className="register__loadbar-img" src={loader} alt="Регистрация" />
+          </div>
         }
 
         <button
-          className={`register__button ${
-            !formik.isValid ? "register__button_disabled" : ""
-          }`}
+          className={`register__button ${!formik.isValid ? "register__button_disabled" : ""
+            }`}
           type="submit"
           aria-label="Зарегистрироваться"
           disabled={!formik.isValid}
@@ -168,8 +148,8 @@ const [visibleConfirmPass, setVisibilityConfirmPass] = React.useState(false);
 }
 
 Register.propTypes = {
-  history: PropTypes.object.isRequired,
-  showResult: PropTypes.func.isRequired,
+  isRegistered: PropTypes.bool.isRequired,
+  registration: PropTypes.func.isRequired,
 };
 
 export default withRouter(Register);

@@ -30,7 +30,7 @@ function ImagePopup({ card, isOpen, onClose, onKeydown }) {
 
 ImagePopup.propTypes = {
   card: PropTypes.object,
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.object,
   onClose: PropTypes.func.isRequired,
   onKeydown: PropTypes.func.isRequired,
 }

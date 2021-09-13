@@ -74,11 +74,11 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
           <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
         </a>
         {
-         loggedIn && headerMobile
+          loggedIn && headerMobile
             ?
-              <button className="header__buton-profile-data" onClick={handleOpenProfileData}>
-                <img className="header__buton-profile-data-img" src={!openedProfileData ? butonProfileData : buttonCloseProfileData} alt="Регистрационные данные пользователя" />
-              </button>
+            <button className="header__buton-profile-data" onClick={handleOpenProfileData}>
+              <img className="header__buton-profile-data-img" src={!openedProfileData ? butonProfileData : buttonCloseProfileData} alt="Регистрационные данные пользователя" />
+            </button>
             :
             <p className="header__mail">{headerUserEmail}
               <Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>

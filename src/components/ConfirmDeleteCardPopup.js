@@ -7,9 +7,9 @@ function ConfirmDeleteCardPopup({ card, onDelete, isOpen, onClose }) {
 
   function handleSubmit() {
     onDelete(card)
-    .then(() => {
-      onClose();
-    })
+      .then(() => {
+        onClose();
+      })
   }
 
   return (

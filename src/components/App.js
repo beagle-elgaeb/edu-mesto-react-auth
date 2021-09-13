@@ -3,8 +3,9 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import api from "../utils/Api";
-import ProtectedRoute from "../utils/ProtectedRoute";
 import * as auth from "../utils/Auth.js";
+
+import ProtectedRoute from "./ProtectedRoute";
 
 import Header from "./Header";
 import Main from "./Main";
@@ -26,11 +27,11 @@ import "../index.css";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function App({ history }) {
-  const [editAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
-  const [editProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
-  const [addCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
-  const [infoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
-  const [infoTooltipSuccess, setInfoTooltipSuccess] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false);
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  const [isInfoTooltipSuccess, setIsInfoTooltipSuccess] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState();
   const [deletingCard, setDeletingCard] = React.useState();
@@ -38,6 +39,9 @@ function App({ history }) {
   const [cards, setCards] = React.useState([]);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [userData, setUserData] = React.useState("");
+
+  const [isLogined, setIsLogined] = React.useState(false);
+  const [isRegistered, setIsRegistered] = React.useState(false);
 
   const { pathname } = useLocation();
 
@@ -65,15 +69,15 @@ function App({ history }) {
   }, []);
 
   function handleEditAvatarClick() {
-    setEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAddCardClick() {
-    setAddCardPopupOpen(true);
+    setIsAddCardPopupOpen(true);
   }
 
   function handleDeleteCardClick(card) {
@@ -81,15 +85,15 @@ function App({ history }) {
   }
 
   function showResult(success) {
-    setInfoTooltipPopupOpen(true);
-    setInfoTooltipSuccess(success);
+    setIsInfoTooltipPopupOpen(true);
+    setIsInfoTooltipSuccess(success);
   }
 
   function closeAllPopups() {
-    setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
-    setAddCardPopupOpen(false);
-    setInfoTooltipPopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddCardPopupOpen(false);
+    setIsInfoTooltipPopupOpen(false);
 
     setSelectedCard(undefined);
     setDeletingCard(undefined);
@@ -177,7 +181,49 @@ function App({ history }) {
           setLoggedIn(true);
           history.push("/content");
         }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function authorization(values) {
+    setIsLogined(true);
+
+    auth.authorize(values)
+      .then((token) => {
+        if (token) {
+          localStorage.setItem("token", token);
+          handleLogin(token);
+          setIsLogined(false);
+          history.push("/content");
+        }
+      })
+      .catch(() => {
+        showResult(false);
+        setIsLogined(false);
       });
+  }
+
+  function registration(values) {
+    setIsRegistered(true);
+
+    if (values.password === values.confirmPassword) {
+      auth
+        .register({
+          email: values.email,
+          password: values.password,
+        })
+        .then(() => {
+          showResult(true);
+          setIsRegistered(false);
+          history.push("/sign-in");
+        })
+        .catch(() => {
+          showResult(false);
+          setIsRegistered(false);
+        });
+    }
   }
 
   function handleLogin(token) {
@@ -221,14 +267,15 @@ function App({ history }) {
 
               <Route path="/sign-in">
                 <Login
-                  showResult={showResult}
-                  handleLogin={handleLogin}
+                  isLogined={isLogined}
+                  authorization={authorization}
                 />
               </Route>
 
               <Route path="/sign-up">
                 <Register
-                  showResult={showResult}
+                  isRegistered={isRegistered}
+                  registration={registration}
                 />
               </Route>
 
@@ -244,7 +291,7 @@ function App({ history }) {
         {currentUser.name &&
           <EditProfilePopup
             onUpdateUser={handleUpdateUser}
-            isOpen={editProfilePopupOpen}
+            isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
             onKeydown={onKeydown}
           />
@@ -252,21 +299,21 @@ function App({ history }) {
 
         <EditAvatarPopup
           onUpdateAvatar={handleUpdateAvatar}
-          isOpen={editAvatarPopupOpen}
+          isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
 
         <AddPlacePopup
           onAddPlace={handleAddPlaceSubmit}
-          isOpen={addCardPopupOpen}
+          isOpen={isAddCardPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
 
         <ImagePopup
           card={selectedCard}
-          isOpen={infoTooltipPopupOpen}
+          isOpen={selectedCard}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
@@ -279,8 +326,8 @@ function App({ history }) {
         />
 
         <InfoTooltip
-          success={infoTooltipSuccess}
-          isOpen={infoTooltipPopupOpen}
+          success={isInfoTooltipSuccess}
+          isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />

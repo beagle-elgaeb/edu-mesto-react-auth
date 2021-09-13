@@ -3,37 +3,19 @@ import { withRouter } from "react-router-dom";
 import { useFormik } from "formik";
 import PropTypes from "prop-types";
 
-import * as auth from "../utils/Auth.js";
-
 import loader from "../images/loader.gif";
 
-function Login({ handleLogin, showResult, history }) {
-  const [isLogined, setIsLogined] = React.useState(false);
-
+function Login({ isLogined, authorization }) {
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: (values) => {
-      setIsLogined(true);
-      auth
-        .authorize({
-          email: values.email,
-          password: values.password,
-        })
-        .then((token) => {
-          if (token) {
-            localStorage.setItem("token", token);
-            handleLogin(token);
-            setIsLogined(false);
-            history.push("/content");
-          }
-        })
-        .catch(() => {
-          showResult(false);
-          setIsLogined(false);
-        });
+      authorization({
+        email: values.email,
+        password: values.password,
+      });
     },
   });
 
@@ -79,9 +61,8 @@ function Login({ handleLogin, showResult, history }) {
 }
 
 Login.propTypes = {
-  history: PropTypes.object.isRequired,
-  handleLogin: PropTypes.func.isRequired,
-  showResult: PropTypes.func.isRequired,
+  isLogined: PropTypes.bool.isRequired,
+  authorization: PropTypes.func.isRequired,
 };
 
 export default withRouter(Login);
