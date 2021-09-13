@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import api from "../utils/Api";
@@ -237,16 +238,16 @@ function App({ history }) {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
+      <Page>
 
-        <div className="page__container">
+        <PageContainer>
           <Header
             pageType={pathname}
             userData={userData}
             handleLogout={handleLogout}
             loggedIn={loggedIn}
           />
-          <main className="content">
+          <Content>
 
             <Switch>
               <ProtectedRoute
@@ -284,9 +285,9 @@ function App({ history }) {
               </Route>
             </Switch>
 
-          </main>
+          </Content>
           <Footer />
-        </div>
+        </PageContainer>
 
         {currentUser.name &&
           <EditProfilePopup
@@ -332,7 +333,7 @@ function App({ history }) {
           onKeydown={onKeydown}
         />
 
-      </div>
+      </Page>
     </CurrentUserContext.Provider>
   );
 }
@@ -342,3 +343,33 @@ App.propTypes = {
 }
 
 export default withRouter(App);
+
+const Page = styled.div`
+    max-width: 1280px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Inter", Tahoma, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #FFFFFF;
+    margin: 0 auto;
+`
+const PageContainer = styled.div`
+    width: 880px;
+    margin: 0 200px;
+    padding: 0;
+
+  @media (max-width: 980px) {
+    width: 581px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 680px) {
+    width: 320px;
+  }
+`
+const Content = styled.main`
+    width: 100%;
+`

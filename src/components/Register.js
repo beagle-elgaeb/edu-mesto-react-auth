@@ -2,6 +2,7 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import eyeOpen from "../images/icon-eye-open.svg";
@@ -56,94 +57,86 @@ function Register({ isRegistered, registration }) {
   }
 
   return (
-    <section className="register">
-      <h1 className="register__title">Регистрация</h1>
-      <form
-        className="register__form"
+    <RegisterContainer>
+      <RegisterTitle>Регистрация</RegisterTitle>
+      <RegisterForm
         name="register"
         onSubmit={formik.handleSubmit}
       >
-        <fieldset className="login__fieldset">
-          <input
+        <RegisterFieldset>
+          <RegisterInput
             id="register-input-email"
-            className="register__input"
             type="email"
             {...formik.getFieldProps("email")}
             placeholder="Email"
           />
-          <span className="register__error">
+          <RegisterError>
             {formik.touched.email && formik.errors.email
               ? formik.errors.email
               : null}
-          </span>
-          <div className="register__pass-input">
-            <input
+          </RegisterError>
+          <RegisterInputPass>
+            <RegisterInput
               id="register-input-pass"
-              className="register__input"
               type={!visiblePass ? "password" : "text"}
               {...formik.getFieldProps("password")}
               placeholder="Пароль"
             />
-            <button className="register__eye" onClick={changeButtonPass}>
-              <img
-                className="register__eye-img"
+            <RegisterEye onClick={changeButtonPass}>
+              <RegisterEyeImg
                 src={!visiblePass ? eyeClose : eyeOpen}
                 alt={!visiblePass ? "Пароль скрыт" : "Пароль показан"}
               />
-            </button>
-          </div>
-          <span className="register__error">
+            </RegisterEye>
+          </RegisterInputPass>
+          <RegisterError>
             {formik.touched.password && formik.errors.password
               ? formik.errors.password
               : null}
-          </span>
-          <div className="register__pass-input">
-            <input
+          </RegisterError>
+          <RegisterInputPass>
+            <RegisterInput
               id="register-input-confirm-pass"
-              className="register__input"
               type={!visibleConfirmPass ? "password" : "text"}
               {...formik.getFieldProps("confirmPassword")}
               placeholder="Повторите пароль"
             />
-            <button className="register__eye" onClick={changeButtonConfirmPass}>
-              <img
-                className="register__eye-img"
+            <RegisterEye onClick={changeButtonConfirmPass}>
+              <RegisterEyeImg
                 src={!visibleConfirmPass ? eyeClose : eyeOpen}
                 alt={!visibleConfirmPass ? "Пароль скрыт" : "Пароль показан"}
               />
-            </button>
-          </div>
-          <span className="register__error">
+            </RegisterEye>
+          </RegisterInputPass>
+          <RegisterError>
             {formik.touched.confirmPassword && formik.errors.confirmPassword
               ? formik.errors.confirmPassword
               : null}
-          </span>
-        </fieldset>
+          </RegisterError>
+        </RegisterFieldset>
 
         {isRegistered
           &&
-          <div className="register__loadbar">
-            <img className="register__loadbar-img" src={loader} alt="Регистрация" />
-          </div>
+          <RegisterLoadbar>
+            <RegisterLoadbarImg src={loader} alt="Регистрация" />
+          </RegisterLoadbar>
         }
 
-        <button
-          className={`register__button ${!formik.isValid ? "register__button_disabled" : ""
-            }`}
+        <RegisterButton
           type="submit"
           aria-label="Зарегистрироваться"
           disabled={!formik.isValid}
         >
           Зарегистрироваться
-        </button>
-      </form>
-      <p className="register__question">
+        </RegisterButton>
+      </RegisterForm>
+      <RegisterQuestion>
         Уже зарегистрированы?{" "}
-        <Link className="register__link" to="/sign-in">
+        <RegisterQuestionLink to="/sign-in">
           Войти
-        </Link>
-      </p>
-    </section>
+        </RegisterQuestionLink>
+      </RegisterQuestion>
+    </RegisterContainer>
   );
 }
 
@@ -153,3 +146,164 @@ Register.propTypes = {
 };
 
 export default withRouter(Register);
+
+const RegisterContainer = styled.section`
+    width: 358px;
+    text-align: center;
+    color: #FFFFFF;
+    margin: 0 auto;
+
+  @media (max-width: 680px) {
+    width: 260px;
+  }
+`
+const RegisterTitle = styled.h1`
+    width: 100%;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 900;
+    margin: 60px 0 20px;
+
+  @media (max-width: 680px) {
+    font-size: 20px;
+    line-height: 24px;
+    margin: 40px 0 10px;
+  }
+
+`
+const RegisterForm = styled.form`
+    width: 100%;
+`
+const RegisterFieldset = styled.fieldset`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: none;
+    margin: 0;
+    padding: 0;
+`
+const RegisterInput = styled.input`
+    width: 358px;
+    height: 27px;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #FFFFFF;
+    outline: none;
+    font-size: 14px;
+    line-height: 17px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 30px 0 0;
+
+  @media (max-width: 680px) {
+    width: 260px;
+  }
+
+  ::placeholder {
+    font-weight: 400;
+    color: #FFFFFF;
+  }
+
+  :-webkit-autofill,
+  :-webkit-autofill:hover,
+  :-webkit-autofill:focus {
+    -webkit-text-fill-color: #FFFFFF;
+    -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+`
+const RegisterInputPass = styled.div`
+    position: relative;
+`
+const RegisterEye = styled.button`
+    width: 22px;
+    position: absolute;
+    bottom: 0px;
+    right: 10px;
+    background: transparent;
+    opacity: .6;
+    border: none;
+    outline: none;
+    transition: opacity .5s ease-out;
+    margin: 0;
+    padding: 0;
+
+  :hover {
+    opacity: .4;
+  }
+`
+const RegisterEyeImg = styled.img`
+    width: 100%;
+`
+const RegisterError = styled.span`
+    width: 358px;
+    height: 0;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 13px;
+    font-weight: 400;
+    color: #FF0000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0 auto -13px auto;
+    padding: 0 0 13px 0;
+
+  @media (max-width: 680px) {
+    width: 260px;
+  }
+`
+const RegisterButton = styled.button`
+    width: 100%;
+    height: 50px;
+    background: ${({ disabled }) => disabled ? "#DDDDDD" : "#FFFFFF"};
+    border: none;
+    border-radius: 2px;
+    outline: none;
+    font-size: 18px;
+    line-height: 22px;
+    color:  ${({ disabled }) => disabled ? "#BBBBBB" : "#000000"};
+    transition: opacity .5s ease-out;
+    margin: 159px 0 0;
+
+  @media (max-width: 680px) {
+    height: 46px;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    margin: 116px 0 0;
+  }
+
+  :hover {
+    opacity: .85;
+  }
+`
+const RegisterQuestion = styled.p`
+    width: 100%;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 30px 0 0;
+
+  @media (max-width: 680px) {
+    margin: 20px 0 0;
+  }
+`
+const RegisterQuestionLink = styled(Link)`
+    color: #FFFFFF;
+    text-decoration: none;
+    transition: opacity .5s ease-out;
+
+  @media (max-width: 680px) {
+    opacity: .6;
+  }
+`
+const RegisterLoadbar = styled.div`
+    width: 60px;
+    height: 60px;
+    margin: 20px auto -80px auto;
+`
+const RegisterLoadbarImg = styled.img`
+    width: 100 %;
+    height: 100 %;
+`

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import logo from "../images/logo.svg";
@@ -70,9 +71,9 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
         </div>
       }
       <header className="header">
-        <a className="logo" href="/">
-          <img className="logo__image" src={logo} alt="Логотип проекта Mesto" />
-        </a>
+        <Logo href="/">
+          <LogoImage src={logo} alt="Логотип проекта Mesto" />
+        </Logo>
         {
           loggedIn && headerMobile
             ?
@@ -98,3 +99,21 @@ Header.propTypes = {
 }
 
 export default withRouter(Header);
+
+const Logo = styled.a`
+    display: block;
+    margin: 0 0 41px 0;
+
+  @media (max-width: 680px) {
+    margin: 0 0 28px 19px;
+  }
+`
+const LogoImage = styled.img`
+    width: 142px;
+    height: 33px;
+
+  @media (max-width: 680px) {
+    width: 103.74px;
+    height: 24.4px;
+  }
+`

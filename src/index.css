@@ -1,11 +1,7 @@
 /* Global */
-@import url(./vendor/normalize.css);                                   /* Нормализация стилей */
-@import url("./vendor/fonts/inter.css");                               /* Шрифты */
-@import url(./styles/body.css);                                   /* Вся страница */
-@import url(./styles/page.css);                                   /* Тело сайта */
-@import url(./styles/content.css);                             /* Контент */
-@import url(./styles/logo.css);                                   /* Логотип */
-@import url(./styles/list.css);                                   /* Списки */
+@import url(./vendor/normalize.css);          /* Нормализация стилей */
+@import url("./vendor/fonts/inter.css");      /* Шрифты */
+@import url(./styles/body.css);               /* Вся страница */
 
 /* Header */
 @import url(./styles/header.css);
@@ -15,18 +11,6 @@
 
 /* Gallery */
 @import url(./styles/photo-gallery.css);
-
-/* Cards */
-@import url(./styles/card.css);
-
-/* Login */
-@import url(./styles/login.css);
-
-/* Register */
-@import url(./styles/register.css);
-
-/* Footer */
-@import url(./styles/footer.css);
 
 /* Popups */
 @import url(./styles/popup.css);

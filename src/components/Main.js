@@ -1,4 +1,5 @@
 import React from "react";
+// import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import Card from "./Card";
@@ -56,3 +57,9 @@ Main.propTypes = {
 }
 
 export default Main;
+
+// const PhotoGalleryCardsList = styled.ul`
+//     list-style: none;
+//     margin: 0;
+//     padding: 0;
+// `
