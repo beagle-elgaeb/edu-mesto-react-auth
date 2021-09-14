@@ -65,7 +65,7 @@ export default withRouter(Login);
 const LoginContainer = styled.section`
   width: 358px;
   text-align: center;
-  color: #ffffff;
+  color: #FFFFFF;
   margin: 0 auto;
 
   @media (max-width: 680px) {
@@ -102,12 +102,12 @@ const Input = styled.input`
   box-sizing: border-box;
   background: transparent;
   border: none;
-  border-bottom: 2px solid #ffffff;
+  border-bottom: 2px solid #FFFFFF;
   outline: none;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
-  color: #ffffff;
+  color: #FFFFFF;
   margin: 30px 0 0;
 
   @media (max-width: 680px) {
@@ -116,13 +116,13 @@ const Input = styled.input`
 
   ::placeholder {
     font-weight: 400;
-    color: #ffffff;
+    color: #FFFFFF;
   }
 
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus {
-    -webkit-text-fill-color: #ffffff;
+    -webkit-text-fill-color: #FFFFFF;
     -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
     transition: background-color 5000s ease-in-out 0s;
   }

@@ -78,7 +78,7 @@ const Item = styled.li`
   display: flex;
   flex-direction: column;
   position: relative;
-  background: #ffffff;
+  background: #FFFFFF;
   border-radius: 11px;
   list-style-type: none;
   margin: 0;

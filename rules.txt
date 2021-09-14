@@ -1,0 +1,53 @@
+Используемые цвета:
+
+#000000
+#545454
+#A9A9A9
+#BBBBBB
+#C4C4C4
+#DDDDDD
+#FFFFFF
+#131414
+#FF0000
+
+Порядок записи стилей:
+  content
+  width
+  height
+  box-sizing
+  overflow
+  object-fit
+  visibility
+  display: flex/grid
+  flex-direction
+  justify-content
+  align-items
+  flex-wrap
+  grid-template
+  grid-gap
+  position
+  top
+  left
+  background
+  opacity
+  border
+  border-radius
+  outline
+  font-size
+  line-height
+  font-weight
+  color
+  text-align
+  text-transform
+  text-decoration
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor
+  transition
+  transform
+  user-select
+  margin
+  padding
+  z-index
+  

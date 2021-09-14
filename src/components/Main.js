@@ -1,5 +1,5 @@
 import React from "react";
-// import styled from "styled-components";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import Card from "./Card";
@@ -7,29 +7,39 @@ import Card from "./Card";
 import loader from "../images/loader.gif";
 import buttonEditImg from "../images/button-edit.svg";
 import buttonAddCard from "../images/button-add.svg";
+import buttonEditAvatar from "../images/button-edit-avatar.svg";
 
-function Main({ cards, currentUser, onEditProfile, onEditAvatar, onAddCard, onCardClick, onCardLike, onCardDelete }) {
+function Main({
+  cards,
+  currentUser,
+  onEditProfile,
+  onEditAvatar,
+  onAddCard,
+  onCardClick,
+  onCardLike,
+  onCardDelete,
+}) {
   return (
     <>
-      <section className="profile">
-        <button className="profile__button-edit-avatar profile__button-edit-avatar-overlay" onClick={onEditAvatar}>
-          <img className="profile__avatar" src={currentUser.avatar ?? loader} alt="Фото профиля" />
-        </button>
-        <div className="profile__info">
-          <div className="profile__info-full-name-and-button-edit">
-            <h1 id="fullName" className="profile__info-full-name">{currentUser.name}</h1>
-            <button className="profile__button-edit" type="button" aria-label="Изменить" onClick={onEditProfile}>
-              <img className="profile__button-edit-img" src={buttonEditImg} alt="Кнопка редактирования профиля" />
-            </button>
-          </div>
-          <p id="profession" className="profile__info-profession">{currentUser.about}</p>
-        </div>
-        <button className="profile__button-add-card" type="button" aria-label="Добавить фото" onClick={onAddCard}>
-          <img className="profile__button-add-card-img" src={buttonAddCard} alt="Кнопка добавления места" />
-        </button>
-      </section>
-      <section className="photo-gallery">
-        <ul className="photo-gallery__cards list">
+      <ProfileContainer>
+        <EditAvatarButton onClick={onEditAvatar}>
+          <Avatar src={currentUser.avatar ?? loader} alt="Фото профиля" />
+        </EditAvatarButton>
+        <Info>
+          <FullNameAndButtonEdit>
+            <FullName id="fullName">{currentUser.name}</FullName>
+            <EditProfileButton type="button" aria-label="Изменить" onClick={onEditProfile}>
+              <EditProfileButtonIcon src={buttonEditImg} alt="Кнопка редактирования профиля" />
+            </EditProfileButton>
+          </FullNameAndButtonEdit>
+          <Profession id="profession">{currentUser.about}</Profession>
+        </Info>
+        <AddCardButton type="button" aria-label="Добавить фото" onClick={onAddCard}>
+          <AddCardButtonIcon src={buttonAddCard} alt="Кнопка добавления места" />
+        </AddCardButton>
+      </ProfileContainer>
+      <PhotoGalleryContainer>
+        <CardsList>
           {cards.map((item) => (
             <Card
               key={item._id}
@@ -39,8 +49,8 @@ function Main({ cards, currentUser, onEditProfile, onEditAvatar, onAddCard, onCa
               onDeleteClick={onCardDelete}
             />
           ))}
-        </ul>
-      </section>
+        </CardsList>
+      </PhotoGalleryContainer>
     </>
   );
 }
@@ -54,12 +64,253 @@ Main.propTypes = {
   onEditProfile: PropTypes.func.isRequired,
   onAddCard: PropTypes.func.isRequired,
   onCardClick: PropTypes.func.isRequired,
-}
+};
 
 export default Main;
 
-// const PhotoGalleryCardsList = styled.ul`
-//     list-style: none;
-//     margin: 0;
-//     padding: 0;
-// `
+const ProfileContainer = styled.section`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 40px 0 0 0;
+
+  @media (max-width: 680px) {
+    flex-direction: column;
+  }
+`;
+
+const EditAvatarButton = styled.button`
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  margin: 0 30px 0 0;
+  padding: 0;
+  z-index: 0;
+
+  @media (max-width: 980px) {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  @media (max-width: 680px) {
+    margin-right: auto;
+  }
+
+  ::after {
+    content: "";
+    width: 120px;
+    height: 120px;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000000;
+    background-position: center;
+    opacity: 0;
+    outline: none;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
+    margin: 0;
+    z-index: 2;
+  }
+
+  :hover::after {
+    visibility: visible;
+    background-image: url(${buttonEditAvatar});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px;
+    opacity: 0.8;
+    z-index: 1;
+  }
+`;
+
+const Avatar = styled.img`
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 980px) {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  @media (max-width: 680px) {
+    margin-right: auto;
+  }
+`;
+
+const Info = styled.div`
+  width: calc(100% - 350px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0;
+
+  @media (max-width: 980px) {
+    max-width: calc(100% - 200px);
+    min-width: calc(100% - 300px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (max-width: 680px) {
+    max-width: 282px;
+    min-width: 282px;
+    width: 282px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+`;
+
+const FullNameAndButtonEdit = styled.div`
+  display: flex;
+  align-items: flex-end;
+
+  @media (max-width: 680px) {
+    margin: 26px auto 0;
+  }
+`;
+
+const FullName = styled.h1`
+  line-height: 48px;
+  font-size: 42px;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+
+  @media (max-width: 680px) {
+    min-width: 50px;
+    max-width: 243px;
+    line-height: 33px;
+    font-size: 28px;
+  }
+`;
+
+const EditProfileButton = styled.button`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.5s ease-out;
+  outline: none;
+  margin: 0 0 9px 18px;
+
+  @media (max-width: 680px) {
+    width: 18px;
+    height: 18px;
+  }
+
+  :hover {
+    opacity: 0.6;
+  }
+`;
+
+const EditProfileButtonIcon = styled.img`
+  width: 10px;
+  height: 10px;
+
+  @media (max-width: 680px) {
+    width: 8px;
+    height: 8px;
+  }
+`;
+
+const Profession = styled.p`
+  line-height: 22px;
+  font-size: 18px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 16px 0 0 0;
+
+  @media (max-width: 680px) {
+    line-height: 17px;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 14px;
+  }
+`;
+
+const AddCardButton = styled.button`
+  width: 150px;
+  height: 50px;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  transition: opacity 0.5s ease-out;
+  outline: none;
+  margin: 0 0 0 auto;
+
+  @media (max-width: 980px) {
+    width: 282px;
+    margin: 49px auto 0 auto;
+  }
+
+  @media (max-width: 680px) {
+    margin: 36px 0 0 0;
+  }
+
+  :hover {
+    opacity: 0.6;
+  }
+`;
+
+const AddCardButtonIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  margin: auto;
+`;
+
+const PhotoGalleryContainer = styled.section`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 49px 0 0 0;
+
+  @media (max-width: 980px) {
+    margin-top: 29px;
+  }
+
+  @media (max-width: 680px) {
+    margin-top: 36px;
+  }
+`;
+
+const CardsList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(3, 282px);
+  grid-template-rows: repeat(auto-fill, 361px);
+  grid-column-gap: 17px;
+  grid-row-gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 980px) {
+    grid-template-columns: repeat(2, 282px);
+  }
+
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(1, 282px);
+  }
+`;

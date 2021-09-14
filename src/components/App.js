@@ -341,7 +341,7 @@ const Page = styled.div`
   font-family: "Inter", Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #ffffff;
+  color: #FFFFFF;
   margin: 0 auto;
 `;
 const PageContainer = styled.div`

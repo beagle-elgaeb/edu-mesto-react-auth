@@ -6,11 +6,5 @@
 /* Header */
 @import url(./styles/header.css);
 
-/* Profile */
-@import url(./styles/profile.css);
-
-/* Gallery */
-@import url(./styles/photo-gallery.css);
-
 /* Popups */
 @import url(./styles/popup.css);
