@@ -22,38 +22,35 @@ function Login({ isLogined, authorization }) {
 
   return (
     <LoginContainer>
-      <LoginTitle>Вход</LoginTitle>
-      <LoginForm name="login" onSubmit={formik.handleSubmit}>
-        <LoginFieldset>
-          <LoginInput
+      <Title>Вход</Title>
+      <Form name="login" onSubmit={formik.handleSubmit}>
+        <Fieldset>
+          <Input
             id="login-input-email"
             type="email"
             {...formik.getFieldProps("email")}
             placeholder="Email"
             required
           />
-          <LoginInput
+          <Input
             id="login-input-pass"
             type="password"
             {...formik.getFieldProps("password")}
             placeholder="Пароль"
             required
           />
-        </LoginFieldset>
+        </Fieldset>
 
         {isLogined && (
-          <LoginLoadbar>
-            <LoginLoadbarImg
-              src={loader}
-              alt="Вход"
-            />
-          </LoginLoadbar>
+          <Loadbar>
+            <LoadbarIcon src={loader} alt="Вход" />
+          </Loadbar>
         )}
 
-        <LoginButton type="submit" aria-label="Войти">
+        <SubmitButton type="submit" aria-label="Войти">
           Войти
-        </LoginButton>
-      </LoginForm>
+        </SubmitButton>
+      </Form>
     </LoginContainer>
   );
 }
@@ -66,53 +63,52 @@ Login.propTypes = {
 export default withRouter(Login);
 
 const LoginContainer = styled.section`
-    width: 358px;
-    text-align: center;
-    color: #FFFFFF;
-    margin: 0 auto;
+  width: 358px;
+  text-align: center;
+  color: #ffffff;
+  margin: 0 auto;
 
   @media (max-width: 680px) {
     width: 260px;
   }
-`
-const LoginTitle = styled.h1`
-    width: 100%;
-    font-size: 24px;
-    line-height: 29px;
-    font-weight: 900;
-    margin: 60px 0 20px;
+`;
+const Title = styled.h1`
+  width: 100%;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 900;
+  margin: 60px 0 20px;
 
   @media (max-width: 680px) {
     font-size: 20px;
     line-height: 24px;
     margin: 40px 0 10px;
   }
-
-`
-const LoginForm = styled.form`
-    width: 100%;
-`
-const LoginFieldset = styled.fieldset`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: none;
-    margin: 0;
-    padding: 0;
-`
-const LoginInput = styled.input`
-    width: 358px;
-    height: 27px;
-    box-sizing: border-box;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #FFFFFF;
-    outline: none;
-    font-size: 14px;
-    line-height: 17px;
-    font-weight: 500;
-    color: #FFFFFF;
-    margin: 30px 0 0;
+`;
+const Form = styled.form`
+  width: 100%;
+`;
+const Fieldset = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+`;
+const Input = styled.input`
+  width: 358px;
+  height: 27px;
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ffffff;
+  outline: none;
+  font-size: 14px;
+  line-height: 17px;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 30px 0 0;
 
   @media (max-width: 680px) {
     width: 260px;
@@ -120,29 +116,29 @@ const LoginInput = styled.input`
 
   ::placeholder {
     font-weight: 400;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus {
-    -webkit-text-fill-color: #FFFFFF;
+    -webkit-text-fill-color: #ffffff;
     -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
     transition: background-color 5000s ease-in-out 0s;
   }
-`
-const LoginButton = styled.button`
-    width: 100%;
-    height: 50px;
-    background: ${({ disabled }) => disabled ? "#DDDDDD" : "#FFFFFF"};
-    border: none;
-    border-radius: 2px;
-    outline: none;
-    font-size: 18px;
-    line-height: 22px;
-    color:  ${({ disabled }) => disabled ? "#BBBBBB" : "#000000"};
-    transition: opacity .5s ease-out;
-    margin: 159px 0 0;
+`;
+const SubmitButton = styled.button`
+  width: 100%;
+  height: 50px;
+  background: ${({ disabled }) => (disabled ? "#DDDDDD" : "#FFFFFF")};
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  font-size: 18px;
+  line-height: 22px;
+  color: ${({ disabled }) => (disabled ? "#BBBBBB" : "#000000")};
+  transition: opacity 0.5s ease-out;
+  margin: 159px 0 0;
 
   @media (max-width: 680px) {
     height: 46px;
@@ -153,15 +149,15 @@ const LoginButton = styled.button`
   }
 
   :hover {
-    opacity: .85;
+    opacity: 0.85;
   }
-`
-const LoginLoadbar = styled.div`
-    width: 60px;
-    height: 60px;
-    margin: 20px auto -80px auto;
-`
-const LoginLoadbarImg = styled.img`
-    width: 100 %;
-    height: 100 %;
-`
+`;
+const Loadbar = styled.div`
+  width: 60px;
+  height: 60px;
+  margin: 20px auto -80px auto;
+`;
+const LoadbarIcon = styled.img`
+  width: 100 %;
+  height: 100 %;
+`;

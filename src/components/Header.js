@@ -18,7 +18,7 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   React.useEffect(() => {
     window.addEventListener("resize", onСhangedScreenWidth);
     return () => document.removeEventListener("resize", onСhangedScreenWidth);
-  }, [])
+  }, []);
 
   if (pageType === "/sign-in") {
     headerLinkName = "Регистрация";
@@ -57,35 +57,52 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   }
 
   function handleOpenProfileData() {
-    setOpenedProfileData(state => !state);
+    setOpenedProfileData((state) => !state);
   }
 
   return (
     <>
-      {
-        headerMobile && loggedIn
-        &&
-        <div className={`header__profile-data ${!openedProfileData ? "header__profile-data_disabled" : ""}`}>
+      {headerMobile && loggedIn && (
+        <div
+          className={`header__profile-data ${
+            !openedProfileData ? "header__profile-data_disabled" : ""
+          }`}
+        >
           <p className="header__profile-data-mail">{headerUserEmail}</p>
-          <Link className="header__profile-data-link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
+          <Link
+            className="header__profile-data-link"
+            to={headerLink}
+            onClick={signOut}
+          >
+            {headerLinkName}
+          </Link>
         </div>
-      }
+      )}
       <header className="header">
         <Logo href="/">
-          <LogoImage src={logo} alt="Логотип проекта Mesto" />
+          <LogoIcon src={logo} alt="Логотип проекта Mesto" />
         </Logo>
-        {
-          loggedIn && headerMobile
-            ?
-            <button className="header__buton-profile-data" onClick={handleOpenProfileData}>
-              <img className="header__buton-profile-data-img" src={!openedProfileData ? butonProfileData : buttonCloseProfileData} alt="Регистрационные данные пользователя" />
-            </button>
-            :
-            <p className="header__mail">{headerUserEmail}
-              <Link className="header__link" to={headerLink} onClick={signOut}>{headerLinkName}</Link>
-            </p>
-
-        }
+        {loggedIn && headerMobile ? (
+          <button
+            className="header__buton-profile-data"
+            onClick={handleOpenProfileData}
+          >
+            <img
+              className="header__buton-profile-data-img"
+              src={
+                !openedProfileData ? butonProfileData : buttonCloseProfileData
+              }
+              alt="Регистрационные данные пользователя"
+            />
+          </button>
+        ) : (
+          <p className="header__mail">
+            {headerUserEmail}
+            <Link className="header__link" to={headerLink} onClick={signOut}>
+              {headerLinkName}
+            </Link>
+          </p>
+        )}
       </header>
     </>
   );
@@ -96,24 +113,24 @@ Header.propTypes = {
   pageType: PropTypes.string.isRequired,
   userData: PropTypes.string.isRequired,
   handleLogout: PropTypes.func.isRequired,
-}
+};
 
 export default withRouter(Header);
 
 const Logo = styled.a`
-    display: block;
-    margin: 0 0 41px 0;
+  display: block;
+  margin: 0 0 41px 0;
 
   @media (max-width: 680px) {
     margin: 0 0 28px 19px;
   }
-`
-const LogoImage = styled.img`
-    width: 142px;
-    height: 33px;
+`;
+const LogoIcon = styled.img`
+  width: 142px;
+  height: 33px;
 
   @media (max-width: 680px) {
     width: 103.74px;
     height: 24.4px;
   }
-`
+`;

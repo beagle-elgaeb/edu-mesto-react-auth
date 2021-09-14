@@ -28,11 +28,11 @@ import "../index.css";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 
 function App({ history }) {
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
-  const [isAddCardPopupOpen, setIsAddCardPopupOpen] = React.useState(false);
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-  const [isInfoTooltipSuccess, setIsInfoTooltipSuccess] = React.useState(false);
+  const [editAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  const [editProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  const [addCardPopupOpen, setAddCardPopupOpen] = React.useState(false);
+  const [infoTooltipPopupOpen, setInfoTooltipPopupOpen] = React.useState(false);
+  const [infoTooltipSuccess, setInfoTooltipSuccess] = React.useState(false);
 
   const [selectedCard, setSelectedCard] = React.useState();
   const [deletingCard, setDeletingCard] = React.useState();
@@ -47,17 +47,14 @@ function App({ history }) {
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    Promise.all([
-      api.getProfileData(),
-      api.getInitialCards()
-    ])
+    Promise.all([api.getProfileData(), api.getInitialCards()])
       .then(([profile, cards]) => {
         setCurrentUser(profile);
         setCards(cards);
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }, []);
 
   React.useEffect(() => {
@@ -70,15 +67,15 @@ function App({ history }) {
   }, []);
 
   function handleEditAvatarClick() {
-    setIsEditAvatarPopupOpen(true);
+    setEditAvatarPopupOpen(true);
   }
 
   function handleEditProfileClick() {
-    setIsEditProfilePopupOpen(true);
+    setEditProfilePopupOpen(true);
   }
 
   function handleAddCardClick() {
-    setIsAddCardPopupOpen(true);
+    setAddCardPopupOpen(true);
   }
 
   function handleDeleteCardClick(card) {
@@ -86,15 +83,15 @@ function App({ history }) {
   }
 
   function showResult(success) {
-    setIsInfoTooltipPopupOpen(true);
-    setIsInfoTooltipSuccess(success);
+    setInfoTooltipPopupOpen(true);
+    setInfoTooltipSuccess(success);
   }
 
   function closeAllPopups() {
-    setIsEditAvatarPopupOpen(false);
-    setIsEditProfilePopupOpen(false);
-    setIsAddCardPopupOpen(false);
-    setIsInfoTooltipPopupOpen(false);
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddCardPopupOpen(false);
+    setInfoTooltipPopupOpen(false);
 
     setSelectedCard(undefined);
     setDeletingCard(undefined);
@@ -111,71 +108,74 @@ function App({ history }) {
   }
 
   function handleUpdateUser(data) {
-    api.setProfileData(data.name, data.about)
+    api
+      .setProfileData(data.name, data.about)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleUpdateAvatar({ avatar }) {
-    api.setAvatar(avatar)
+    api
+      .setAvatar(avatar)
       .then((result) => {
         setCurrentUser(result);
         closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
-    setCards((state) => state.map((c) => c._id === card._id ? { ...c, likeClicked: true } : c));
+    setCards((state) => state.map((c) => (c._id === card._id ? { ...c, likeClicked: true } : c)));
 
-    const promise = isLiked ?
-      api.unlikeCard(card._id) :
-      api.likeCard(card._id);
+    const promise = isLiked ? api.unlikeCard(card._id) : api.likeCard(card._id);
 
     promise
       .then((card) => {
-        setCards((state) => state.map((c) => c._id === card._id ? card : c));
+        setCards((state) => state.map((c) => (c._id === card._id ? card : c)));
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleCardDelete(card) {
-    setCards((state) => state.map((c) => c._id === card._id ? { ...c, deleteClicked: true } : c));
+    setCards((state) => state.map((c) => (c._id === card._id ? { ...c, deleteClicked: true } : c)));
 
-    return api.removeCard(card._id)
+    return api
+      .removeCard(card._id)
       .then(() => {
         const newCards = cards.filter((c) => c._id !== card._id);
         setCards(newCards);
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function handleAddPlaceSubmit(data) {
-    api.createCard(data.title, data.pic)
+    api
+      .createCard(data.title, data.pic)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function loadProfile(token) {
-    auth.getContent(token)
+    auth
+      .getContent(token)
       .then((res) => {
         if (res) {
           setUserData(res.data.email);
@@ -185,13 +185,14 @@ function App({ history }) {
       })
       .catch((err) => {
         console.log(err);
-      })
+      });
   }
 
   function authorization(values) {
     setIsLogined(true);
 
-    auth.authorize(values)
+    auth
+      .authorize(values)
       .then((token) => {
         if (token) {
           localStorage.setItem("token", token);
@@ -239,7 +240,6 @@ function App({ history }) {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Page>
-
         <PageContainer>
           <Header
             pageType={pathname}
@@ -248,12 +248,8 @@ function App({ history }) {
             loggedIn={loggedIn}
           />
           <Content>
-
             <Switch>
-              <ProtectedRoute
-                path="/content"
-                loggedIn={loggedIn}
-              >
+              <ProtectedRoute path="/content" loggedIn={loggedIn}>
                 <Main
                   cards={cards}
                   currentUser={currentUser}
@@ -267,47 +263,40 @@ function App({ history }) {
               </ProtectedRoute>
 
               <Route path="/sign-in">
-                <Login
-                  isLogined={isLogined}
-                  authorization={authorization}
-                />
+                <Login isLogined={isLogined} authorization={authorization} />
               </Route>
 
               <Route path="/sign-up">
-                <Register
-                  isRegistered={isRegistered}
-                  registration={registration}
-                />
+                <Register isRegistered={isRegistered} registration={registration} />
               </Route>
 
               <Route exact path="/">
                 {loggedIn ? <Redirect to="/content" /> : <Redirect to="/sign-in" />}
               </Route>
             </Switch>
-
           </Content>
           <Footer />
         </PageContainer>
 
-        {currentUser.name &&
+        {currentUser.name && (
           <EditProfilePopup
             onUpdateUser={handleUpdateUser}
-            isOpen={isEditProfilePopupOpen}
+            isOpen={editProfilePopupOpen}
             onClose={closeAllPopups}
             onKeydown={onKeydown}
           />
-        }
+        )}
 
         <EditAvatarPopup
           onUpdateAvatar={handleUpdateAvatar}
-          isOpen={isEditAvatarPopupOpen}
+          isOpen={editAvatarPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
 
         <AddPlacePopup
           onAddPlace={handleAddPlaceSubmit}
-          isOpen={isAddCardPopupOpen}
+          isOpen={addCardPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
@@ -327,12 +316,11 @@ function App({ history }) {
         />
 
         <InfoTooltip
-          success={isInfoTooltipSuccess}
-          isOpen={isInfoTooltipPopupOpen}
+          success={infoTooltipSuccess}
+          isOpen={infoTooltipPopupOpen}
           onClose={closeAllPopups}
           onKeydown={onKeydown}
         />
-
       </Page>
     </CurrentUserContext.Provider>
   );
@@ -340,26 +328,26 @@ function App({ history }) {
 
 App.propTypes = {
   history: PropTypes.object.isRequired,
-}
+};
 
 export default withRouter(App);
 
 const Page = styled.div`
-    max-width: 1280px;
-    min-width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Inter", Tahoma, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #FFFFFF;
-    margin: 0 auto;
-`
+  max-width: 1280px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Inter", Tahoma, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #ffffff;
+  margin: 0 auto;
+`;
 const PageContainer = styled.div`
-    width: 880px;
-    margin: 0 200px;
-    padding: 0;
+  width: 880px;
+  margin: 0 200px;
+  padding: 0;
 
   @media (max-width: 980px) {
     width: 581px;
@@ -369,7 +357,7 @@ const PageContainer = styled.div`
   @media (max-width: 680px) {
     width: 320px;
   }
-`
+`;
 const Content = styled.main`
-    width: 100%;
-`
+  width: 100%;
+`;

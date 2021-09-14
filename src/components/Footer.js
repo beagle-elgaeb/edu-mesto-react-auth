@@ -3,7 +3,7 @@ import styled from "styled-components";
 function Footer() {
   return (
     <FooterContainer>
-      <FooterCopyright>© 2021 Mesto Russia</FooterCopyright>
+      <Copyright>© 2021 Mesto Russia</Copyright>
     </FooterContainer>
   );
 }
@@ -18,7 +18,7 @@ const FooterContainer = styled.footer`
     margin: 70px 0 37px 0;
   }
 `
-const FooterCopyright = styled.p`
+const Copyright = styled.p`
     font-size: 18px;
     line-height: 22px;
     font-weight: 400;
