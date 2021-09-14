@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import PopupWithForm from "./PopupWithForm";
@@ -44,31 +45,29 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose, onKeydown }) {
       onKeydown={onKeydown}
       disabledSubmit={!formik.isValid}
     >
-      <fieldset className="popup__fieldset">
-
-        <input
+      <Fieldset>
+        <Input
           id="name-input"
-          className="popup__input popup__input_text_full-name"
+          className={!formik.isValid && "error"}
           type="text"
           {...formik.getFieldProps("fullName")}
           placeholder="Ваше имя"
         />
-        <span className="popup__error">
+        <Error>
           {formik.touched.fullName && formik.errors.fullName ? formik.errors.fullName : null}
-        </span>
+        </Error>
 
-        <input
+        <Input
           id="about-you-input"
-          className="popup__input popup__input_text_profession"
+          className={!formik.isValid && "error"}
           type="text"
           {...formik.getFieldProps("profession")}
           placeholder="Ваша профессия"
         />
-        <span className="popup__error">
+        <Error>
           {formik.touched.profession && formik.errors.profession ? formik.errors.profession : null}
-        </span>
-
-      </fieldset>
+        </Error>
+      </Fieldset>
     </PopupWithForm>
   );
 }
@@ -78,6 +77,58 @@ EditProfilePopup.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onKeydown: PropTypes.func.isRequired,
-}
+};
 
 export default EditProfilePopup;
+
+const Fieldset = styled.fieldset`
+  display: flex;
+  flex-direction: column;
+  border: 0;
+  line-height: 17px;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+`;
+
+const Input = styled.input`
+  width: 358px;
+  height: 27px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dddddd;
+  outline: none;
+  margin: 30px 0 0 0;
+
+  @media (max-width: 680px) {
+    width: 238px;
+  }
+
+  ::placeholder {
+    color: #c4c4c4;
+  }
+
+  &.error {
+    border: 0;
+    border-bottom: 1px solid #ff0000;
+  }
+`;
+
+const Error = styled.span`
+  width: 358px;
+  height: 0;
+  overflow: visible;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #ff0000;
+  margin: 0 auto -5px auto;
+  padding: 5px 0 0 0;
+
+  @media (max-width: 680px) {
+    width: 238px;
+  }
+`;

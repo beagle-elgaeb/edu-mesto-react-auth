@@ -333,15 +333,18 @@ App.propTypes = {
 export default withRouter(App);
 
 const Page = styled.div`
+  min-height: 100vh;
   max-width: 1280px;
   min-width: 320px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: #000000;
   font-family: "Inter", Tahoma, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 auto;
 `;
 const PageContainer = styled.div`

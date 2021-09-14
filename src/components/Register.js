@@ -25,18 +25,9 @@ function Register({ isRegistered, registration }) {
         .required("Введите, пожалуйста, email"),
       password: Yup.string()
         .min(8, "Пароль не должно быть короче 8 символов")
-        .matches(
-          /^[a-zA-Z0-9]/,
-          "Пароль может сожержать только латинские символы"
-        )
-        .matches(
-          /^(?=.*[A-Z])/,
-          "Пароль должен содержать хотябы один символ верхнего регистра"
-        )
-        .matches(
-          /^(?=.*[a-z])/,
-          "Пароль должен содержать хотябы один символ нижнего регистра"
-        )
+        .matches(/^[a-zA-Z0-9]/, "Пароль может сожержать только латинские символы")
+        .matches(/^(?=.*[A-Z])/, "Пароль должен содержать хотябы один символ верхнего регистра")
+        .matches(/^(?=.*[a-z])/, "Пароль должен содержать хотябы один символ нижнего регистра")
         .matches(/^(?=.*[0-9])/, "Пароль должен содержать хотябы одну цифру")
         .required("Введите, пожалуйста, пароль"),
       confirmPassword: Yup.string()
@@ -67,11 +58,7 @@ function Register({ isRegistered, registration }) {
             {...formik.getFieldProps("email")}
             placeholder="Email"
           />
-          <Error>
-            {formik.touched.email && formik.errors.email
-              ? formik.errors.email
-              : null}
-          </Error>
+          <Error>{formik.touched.email && formik.errors.email ? formik.errors.email : null}</Error>
           <InputPass>
             <Input
               id="register-input-pass"
@@ -87,9 +74,7 @@ function Register({ isRegistered, registration }) {
             </Eye>
           </InputPass>
           <Error>
-            {formik.touched.password && formik.errors.password
-              ? formik.errors.password
-              : null}
+            {formik.touched.password && formik.errors.password ? formik.errors.password : null}
           </Error>
           <InputPass>
             <Input
@@ -118,17 +103,12 @@ function Register({ isRegistered, registration }) {
           </Loadbar>
         )}
 
-        <SubmitButton
-          type="submit"
-          aria-label="Зарегистрироваться"
-          disabled={!formik.isValid}
-        >
+        <SubmitButton type="submit" aria-label="Зарегистрироваться" disabled={!formik.isValid}>
           Зарегистрироваться
         </SubmitButton>
       </Form>
       <Question>
-        Уже зарегистрированы?{" "}
-        <QuestionLink to="/sign-in">Войти</QuestionLink>
+        Уже зарегистрированы? <QuestionLink to="/sign-in">Войти</QuestionLink>
       </Question>
     </RegisterContainer>
   );
@@ -144,7 +124,7 @@ export default withRouter(Register);
 const RegisterContainer = styled.section`
   width: 358px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 auto;
 
   @media (max-width: 680px) {
@@ -185,12 +165,12 @@ const Input = styled.input`
   box-sizing: border-box;
   background: transparent;
   border: none;
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
   outline: none;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 30px 0 0;
 
   @media (max-width: 680px) {
@@ -199,13 +179,13 @@ const Input = styled.input`
 
   ::placeholder {
     font-weight: 400;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus {
-    -webkit-text-fill-color: #FFFFFF;
+    -webkit-text-fill-color: #ffffff;
     -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
     transition: background-color 5000s ease-in-out 0s;
   }
@@ -244,7 +224,7 @@ const Error = styled.span`
   font-size: 12px;
   line-height: 13px;
   font-weight: 400;
-  color: #FF0000;
+  color: #ff0000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -294,7 +274,7 @@ const Question = styled.p`
 `;
 
 const QuestionLink = styled(Link)`
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
   transition: opacity 0.5s ease-out;
 
@@ -310,6 +290,6 @@ const Loadbar = styled.div`
 `;
 
 const LoadbarIcon = styled.img`
-  width: 100 %;
-  height: 100 %;
+  width: 100%;
+  height: 100%;
 `;

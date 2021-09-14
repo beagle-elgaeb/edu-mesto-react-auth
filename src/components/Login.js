@@ -65,13 +65,14 @@ export default withRouter(Login);
 const LoginContainer = styled.section`
   width: 358px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 auto;
 
   @media (max-width: 680px) {
     width: 260px;
   }
 `;
+
 const Title = styled.h1`
   width: 100%;
   font-size: 24px;
@@ -85,9 +86,11 @@ const Title = styled.h1`
     margin: 40px 0 10px;
   }
 `;
+
 const Form = styled.form`
   width: 100%;
 `;
+
 const Fieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
@@ -96,18 +99,19 @@ const Fieldset = styled.fieldset`
   margin: 0;
   padding: 0;
 `;
+
 const Input = styled.input`
   width: 358px;
   height: 27px;
   box-sizing: border-box;
   background: transparent;
   border: none;
-  border-bottom: 2px solid #FFFFFF;
+  border-bottom: 2px solid #ffffff;
   outline: none;
   font-size: 14px;
   line-height: 17px;
   font-weight: 500;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 30px 0 0;
 
   @media (max-width: 680px) {
@@ -116,17 +120,18 @@ const Input = styled.input`
 
   ::placeholder {
     font-weight: 400;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus {
-    -webkit-text-fill-color: #FFFFFF;
+    -webkit-text-fill-color: #ffffff;
     -webkit-box-shadow: 0 0 0px 1000px #131414 inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 `;
+
 const SubmitButton = styled.button`
   width: 100%;
   height: 50px;
@@ -152,12 +157,14 @@ const SubmitButton = styled.button`
     opacity: 0.85;
   }
 `;
+
 const Loadbar = styled.div`
   width: 60px;
   height: 60px;
   margin: 20px auto -80px auto;
 `;
+
 const LoadbarIcon = styled.img`
-  width: 100 %;
-  height: 100 %;
+  width: 100%;
+  height: 100%;
 `;

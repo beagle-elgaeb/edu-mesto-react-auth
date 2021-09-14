@@ -1,7 +1,2 @@
-/* Global */
-@import url(./vendor/normalize.css);          /* Нормализация стилей */
-@import url("./vendor/fonts/inter.css");      /* Шрифты */
-@import url(./styles/body.css);               /* Вся страница */
-
-/* Popups */
-@import url(./styles/popup.css);
+@import url(./vendor/normalize.css);      /* Нормализация стилей */
+@import url("./vendor/fonts/inter.css");  /* Шрифты */

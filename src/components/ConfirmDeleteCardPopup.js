@@ -4,12 +4,10 @@ import PropTypes from "prop-types";
 import PopupWithForm from "./PopupWithForm";
 
 function ConfirmDeleteCardPopup({ card, onDelete, isOpen, onClose }) {
-
   function handleSubmit() {
-    onDelete(card)
-      .then(() => {
-        onClose();
-      })
+    onDelete(card).then(() => {
+      onClose();
+    });
   }
 
   return (
@@ -29,6 +27,6 @@ ConfirmDeleteCardPopup.propTypes = {
   onDelete: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-}
+};
 
 export default ConfirmDeleteCardPopup;
