@@ -47,6 +47,7 @@
   transition
   transform
   user-select
+  list-style
   margin
   padding
   z-index

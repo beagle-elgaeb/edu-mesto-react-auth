@@ -63,47 +63,33 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   return (
     <>
       {headerMobile && loggedIn && (
-        <div
-          className={`header__profile-data ${
-            !openedProfileData ? "header__profile-data_disabled" : ""
-          }`}
-        >
-          <p className="header__profile-data-mail">{headerUserEmail}</p>
-          <Link
-            className="header__profile-data-link"
-            to={headerLink}
-            onClick={signOut}
-          >
+        <ProfileData className={!openedProfileData && "disabled"}>
+          <MailUp>{headerUserEmail}</MailUp>
+          <ExitLinkUp to={headerLink} onClick={signOut}>
             {headerLinkName}
-          </Link>
-        </div>
+          </ExitLinkUp>
+        </ProfileData>
       )}
-      <header className="header">
+      <Container>
         <Logo href="/">
           <LogoIcon src={logo} alt="Логотип проекта Mesto" />
         </Logo>
         {loggedIn && headerMobile ? (
-          <button
-            className="header__buton-profile-data"
-            onClick={handleOpenProfileData}
-          >
-            <img
-              className="header__buton-profile-data-img"
-              src={
-                !openedProfileData ? butonProfileData : buttonCloseProfileData
-              }
+          <ProfileDataButon onClick={handleOpenProfileData}>
+            <ProfileDataButonIcon
+              src={!openedProfileData ? butonProfileData : buttonCloseProfileData}
               alt="Регистрационные данные пользователя"
             />
-          </button>
+          </ProfileDataButon>
         ) : (
-          <p className="header__mail">
+          <Mail>
             {headerUserEmail}
-            <Link className="header__link" to={headerLink} onClick={signOut}>
+            <ExitLink to={headerLink} onClick={signOut}>
               {headerLinkName}
-            </Link>
-          </p>
+            </ExitLink>
+          </Mail>
         )}
-      </header>
+      </Container>
     </>
   );
 }
@@ -117,6 +103,35 @@ Header.propTypes = {
 
 export default withRouter(Header);
 
+const ProfileData = styled.div`
+  width: 100%;
+  max-height: 150px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: max-height 0.5s ease-in-out;
+
+  &.disabled {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.2s linear;
+  }
+`;
+
+const Container = styled.header`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  opacity: 0.7;
+  border-bottom: 1px solid #545454;
+  margin: 45px 0 0 0;
+
+  @media (max-width: 680px) {
+    margin: 28px 0 0 0;
+  }
+`;
+
 const Logo = styled.a`
   display: block;
   margin: 0 0 41px 0;
@@ -125,12 +140,74 @@ const Logo = styled.a`
     margin: 0 0 28px 19px;
   }
 `;
+
 const LogoIcon = styled.img`
   width: 142px;
   height: 33px;
 
   @media (max-width: 680px) {
-    width: 103.74px;
-    height: 24.4px;
+    width: 104px;
+    height: 24px;
   }
+`;
+
+const ProfileDataButon = styled.button`
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  outline: none;
+  transition: opacity 0.5s ease-out;
+  margin: 8px 0 0 0;
+  padding: 0;
+
+  @media (max-width: 680px) {
+    margin: 0 19px 28px 0;
+  }
+
+  :hover {
+    opacity: 0.6;
+  }
+`;
+
+const ProfileDataButonIcon = styled.img`
+  width: 100%;
+  height: 100%;
+`;
+
+const Mail = styled.p`
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  text-decoration: none;
+  margin: 6px 0 46px;
+
+  @media (max-width: 680px) {
+    font-size: 14px;
+    line-height: 17px;
+    margin: 6px 19px 33px 0;
+  }
+`;
+
+const MailUp = styled(Mail)`
+  margin: 40px 0 18px 0;
+`;
+
+const ExitLink = styled(Link)`
+  color: #a9a9a9;
+  text-decoration: none;
+  transition: opacity 0.5s ease-out;
+  margin: 0 0 0 24px;
+
+  :hover {
+    opacity: 0.6;
+  }
+`;
+
+const ExitLinkUp = styled(ExitLink)`
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  margin: 0 0 40px 0;
 `;

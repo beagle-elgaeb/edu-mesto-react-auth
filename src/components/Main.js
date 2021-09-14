@@ -94,12 +94,11 @@ const EditAvatarButton = styled.button`
   z-index: 0;
 
   @media (max-width: 980px) {
-    margin-left: auto;
-    margin-right: 0;
+    margin: 0 0 0 auto;
   }
 
   @media (max-width: 680px) {
-    margin-right: auto;
+    margin: 0 auto;
   }
 
   ::after {
@@ -134,40 +133,37 @@ const Avatar = styled.img`
   width: 120px;
   height: 120px;
   object-fit: cover;
-  z-index: 1;
   margin: 0;
   padding: 0;
+  z-index: 1;
 
   @media (max-width: 980px) {
-    margin-left: auto;
-    margin-right: 0;
+    margin: 0 0 0 auto;
   }
 
   @media (max-width: 680px) {
-    margin-right: auto;
+    margin: 0 auto;
   }
 `;
 
 const Info = styled.div`
   width: calc(100% - 350px);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   margin: 0;
 
   @media (max-width: 980px) {
     max-width: calc(100% - 200px);
     min-width: calc(100% - 300px);
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
   }
 
   @media (max-width: 680px) {
     max-width: 282px;
     min-width: 282px;
     width: 282px;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 0;
   }
 `;
 
@@ -181,8 +177,8 @@ const FullNameAndButtonEdit = styled.div`
 `;
 
 const FullName = styled.h1`
-  line-height: 48px;
   font-size: 42px;
+  line-height: 48px;
   font-weight: 500;
   text-align: center;
   white-space: nowrap;
@@ -193,8 +189,8 @@ const FullName = styled.h1`
   @media (max-width: 680px) {
     min-width: 50px;
     max-width: 243px;
-    line-height: 33px;
     font-size: 28px;
+    line-height: 33px;
   }
 `;
 
@@ -204,11 +200,10 @@ const EditProfileButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ffffff;
   background: transparent;
-  cursor: pointer;
-  transition: opacity 0.5s ease-out;
+  border: 1px solid #ffffff;
   outline: none;
+  transition: opacity 0.5s ease-out;
   margin: 0 0 9px 18px;
 
   @media (max-width: 680px) {
@@ -232,8 +227,8 @@ const EditProfileButtonIcon = styled.img`
 `;
 
 const Profession = styled.p`
-  line-height: 22px;
   font-size: 18px;
+  line-height: 22px;
   font-weight: 400;
   white-space: nowrap;
   overflow: hidden;
@@ -241,22 +236,21 @@ const Profession = styled.p`
   margin: 16px 0 0 0;
 
   @media (max-width: 680px) {
-    line-height: 17px;
     font-size: 14px;
+    line-height: 17px;
     text-align: center;
-    margin-top: 14px;
+    margin: 14px 0 0 0;
   }
 `;
 
 const AddCardButton = styled.button`
   width: 150px;
   height: 50px;
-  border: 2px solid #ffffff;
-  border-radius: 2px;
   background: transparent;
-  cursor: pointer;
-  transition: opacity 0.5s ease-out;
+  border: 2px solid #ffffff;
   outline: none;
+  border-radius: 2px;
+  transition: opacity 0.5s ease-out;
   margin: 0 0 0 auto;
 
   @media (max-width: 980px) {
@@ -286,11 +280,11 @@ const PhotoGalleryContainer = styled.section`
   margin: 49px 0 0 0;
 
   @media (max-width: 980px) {
-    margin-top: 29px;
+    margin: 29px 0 0 0;
   }
 
   @media (max-width: 680px) {
-    margin-top: 36px;
+    margin: 36px 0 0 0;
   }
 `;
 
@@ -300,8 +294,6 @@ const CardsList = styled.ul`
   grid-template-rows: repeat(auto-fill, 361px);
   grid-column-gap: 17px;
   grid-row-gap: 20px;
-  margin: 0;
-  padding: 0;
   list-style: none;
   margin: 0;
   padding: 0;

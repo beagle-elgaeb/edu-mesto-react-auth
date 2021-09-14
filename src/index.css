@@ -3,8 +3,5 @@
 @import url("./vendor/fonts/inter.css");      /* Шрифты */
 @import url(./styles/body.css);               /* Вся страница */
 
-/* Header */
-@import url(./styles/header.css);
-
 /* Popups */
 @import url(./styles/popup.css);
