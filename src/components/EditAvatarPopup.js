@@ -42,7 +42,7 @@ function EditAvatarPopup({ onUpdateAvatar, isOpen, onClose, onKeydown }) {
       <Fieldset>
         <Input
           id="url-avatar-input"
-          className={!formik.isValid && "error"}
+          error={!formik.errors.avatar}
           type="url"
           {...formik.getFieldProps("avatar")}
           placeholder="Ссылка на аватар"
@@ -80,7 +80,7 @@ const Input = styled.input`
   height: 27px;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${({ error }) => error ? "#ff0000" : "#dddddd"};
   outline: none;
   margin: 30px 0 0 0;
 
@@ -90,11 +90,6 @@ const Input = styled.input`
 
   ::placeholder {
     color: #c4c4c4;
-  }
-
-  &.error {
-    border: 0;
-    border-bottom: 1px solid #ff0000;
   }
 `;
 

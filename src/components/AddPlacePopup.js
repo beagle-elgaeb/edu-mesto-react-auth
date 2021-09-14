@@ -48,7 +48,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose, onKeydown }) {
       <Fieldset>
         <Input
           id="title-pic-input"
-          className={!formik.isValid && "error"}
+          error={!formik.errors.title}
           type="text"
           {...formik.getFieldProps("title")}
           placeholder="Название места"
@@ -57,7 +57,7 @@ function AddPlacePopup({ onAddPlace, isOpen, onClose, onKeydown }) {
 
         <Input
           id="url-pic-input"
-          className={!formik.isValid && "error"}
+          error={!formik.errors.pic}
           type="url"
           {...formik.getFieldProps("pic")}
           placeholder="Ссылка на картинку"
@@ -95,7 +95,7 @@ const Input = styled.input`
   height: 27px;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${({ error }) => error ? "#ff0000" : "#dddddd"};
   outline: none;
   margin: 30px 0 0 0;
 
@@ -105,11 +105,6 @@ const Input = styled.input`
 
   ::placeholder {
     color: #c4c4c4;
-  }
-
-  &.error {
-    border: 0;
-    border-bottom: 1px solid #ff0000;
   }
 `;
 

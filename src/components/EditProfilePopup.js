@@ -48,7 +48,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose, onKeydown }) {
       <Fieldset>
         <Input
           id="name-input"
-          className={!formik.isValid && "error"}
+          error={!formik.errors.fullName}
           type="text"
           {...formik.getFieldProps("fullName")}
           placeholder="Ваше имя"
@@ -59,7 +59,7 @@ function EditProfilePopup({ onUpdateUser, isOpen, onClose, onKeydown }) {
 
         <Input
           id="about-you-input"
-          className={!formik.isValid && "error"}
+          error={!formik.errors.profession}
           type="text"
           {...formik.getFieldProps("profession")}
           placeholder="Ваша профессия"
@@ -99,7 +99,7 @@ const Input = styled.input`
   height: 27px;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid ${({ error }) => (error ? "#ff0000" : "#dddddd")};
   outline: none;
   margin: 30px 0 0 0;
 
@@ -109,11 +109,6 @@ const Input = styled.input`
 
   ::placeholder {
     color: #c4c4c4;
-  }
-
-  &.error {
-    border: 0;
-    border-bottom: 1px solid #ff0000;
   }
 `;
 

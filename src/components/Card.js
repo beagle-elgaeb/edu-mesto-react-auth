@@ -94,6 +94,7 @@ const DeleteButton = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   animation: none;
   margin: 0;
@@ -154,6 +155,7 @@ const LikeButton = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: auto 18px auto 0;
 

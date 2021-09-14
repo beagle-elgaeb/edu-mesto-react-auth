@@ -63,7 +63,7 @@ function Header({ loggedIn, pageType, userData, handleLogout }) {
   return (
     <>
       {headerMobile && loggedIn && (
-        <ProfileData className={!openedProfileData && "disabled"}>
+        <ProfileData disabled={!openedProfileData}>
           <MailUp>{headerUserEmail}</MailUp>
           <ExitLinkUp to={headerLink} onClick={signOut}>
             {headerLinkName}
@@ -105,18 +105,13 @@ export default withRouter(Header);
 
 const ProfileData = styled.div`
   width: 100%;
-  max-height: 150px;
+  max-height: ${({ disabled }) => (disabled ? "0px" : "150px")};
   overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: max-height 0.5s ease-in-out;
-
-  &.disabled {
-    max-height: 0px;
-    overflow: hidden;
-    transition: max-height 0.2s linear;
-  }
+  transition: ${({ disabled }) =>
+    disabled ? "max-height 0.2s linear" : "max-height 0.5s ease-in-out"};
 `;
 
 const Container = styled.header`
@@ -134,6 +129,7 @@ const Container = styled.header`
 
 const Logo = styled.a`
   display: block;
+  cursor: pointer;
   margin: 0 0 41px 0;
 
   @media (max-width: 680px) {
@@ -157,6 +153,7 @@ const ProfileDataButon = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 8px 0 0 0;
   padding: 0;
@@ -197,6 +194,7 @@ const MailUp = styled(Mail)`
 const ExitLink = styled(Link)`
   color: #a9a9a9;
   text-decoration: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0 0 0 24px;
 
@@ -209,5 +207,6 @@ const ExitLinkUp = styled(ExitLink)`
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
+  cursor: pointer;
   margin: 0 0 40px 0;
 `;

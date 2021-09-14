@@ -89,6 +89,7 @@ const EditAvatarButton = styled.button`
   border: none;
   border-radius: 50%;
   outline: none;
+  cursor: pointer;
   margin: 0 30px 0 0;
   padding: 0;
   z-index: 0;
@@ -203,6 +204,7 @@ const EditProfileButton = styled.button`
   background: transparent;
   border: 1px solid #ffffff;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0 0 9px 18px;
 
@@ -250,6 +252,7 @@ const AddCardButton = styled.button`
   border: 2px solid #ffffff;
   outline: none;
   border-radius: 2px;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0 0 0 auto;
 

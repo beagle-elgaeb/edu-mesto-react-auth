@@ -9,8 +9,6 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
   <img src="readme/icon-whitespace-5px.svg"/>
   <a href="https://developer.mozilla.org/ru/docs/Glossary/HTML5"><img src="readme/icon-html5.svg" alt="HTML5"></a>
   <img src="readme/icon-whitespace-5px.svg"/>
-  <a href="https://ru.bem.info/"><img src="readme/icon-bem.svg" alt="БЭМ"></a>
-  <img src="readme/icon-whitespace-5px.svg"/>
   <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript"><img src="readme/icon-js.svg" alt="JS"></a>
   <img src="readme/icon-whitespace-5px.svg"/>
   <a href="https://npmjs.com/"><img src="readme/icon-npm.svg" alt="NPM"></a>
@@ -29,7 +27,7 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
 ### Описание
 
 В данном учебном проекте к _[предыдущему проекту](https://github.com/beagle-elgaeb/mesto-react)_ добавлена функция регистрации и авторизации.  
-Получившееся web-приложение позволяет пользователю регистрироваться и авторизовываться, редактировать свой профиль, просматривать галерею фотографий тех мест, где побывали другие пользователи, а так же добавлять фотографии тех мест, где побывал он сам, оценивать фотографии лайками, удалять свои фотографии.
+Получившееся web-приложение позволяет пользователю просматривать галерею фотографий тех мест, где побывали другие пользователи, а так же добавлять фотографии тех мест, где побывал он сам.
 
 ### Функциональность проекта
 
@@ -49,27 +47,18 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
 
 ### Планы на дальнейшую реализацию проекта
 
-- Нет
+- Работа с бэкэндом.
 
 ### Как использовать
 
 Сборка:
-
-```
-npm run build
-```
+```npm run build```
 
 Локальный запуск:
-
-```
-npm start
-```
+```npm start```
 
 Деплой на GH Pages:
-
-```
-npm run deploy
-```
+```npm run deploy```
 
 ## Связаться со мной
 

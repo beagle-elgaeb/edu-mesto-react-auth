@@ -142,6 +142,7 @@ const SubmitButton = styled.button`
   font-size: 18px;
   line-height: 22px;
   color: ${({ disabled }) => (disabled ? "#BBBBBB" : "#000000")};
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 159px 0 0;
 

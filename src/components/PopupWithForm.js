@@ -39,21 +39,12 @@ function PopupWithForm({
   }
 
   return (
-    <PopupOverlay className={`popup_type_${name} ${isOpen && "opened"}`} onClick={onClose}>
+    <PopupOverlay opened={isOpen} onClick={onClose}>
       <PopupContainer onClick={(e) => e.stopPropagation()}>
         <Title>{title}</Title>
-        <Form
-          className={`popup__form_type_${name}`}
-          name={`form - ${name}`}
-          onSubmit={handleSubmit}
-        >
+        <Form onSubmit={handleSubmit}>
           {children}
-          <SubmitButton
-            className={disabledSubmit && "disabled"}
-            type="submit"
-            aria-label="Сохранить"
-            disabled={disabledSubmit}
-          >
+          <SubmitButton type="submit" aria-label="Сохранить" disabled={disabledSubmit}>
             {buttonText}
             {isSubmit ? "..." : ""}
           </SubmitButton>
@@ -89,18 +80,12 @@ const PopupOverlay = styled.div`
   position: fixed;
   top: 0;
   overflow: hidden;
-  visibility: hidden;
-  opacity: 0;
+  visibility: ${({ opened }) => (opened ? "visible" : "hidden")};
+  opacity: ${({ opened }) => (opened ? "1" : "0")};
   background: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in;
   margin: 0;
-  z-index: -1;
-
-  &.opened {
-    visibility: visible;
-    opacity: 1;
-    z-index: 2;
-  }
+  z-index: ${({ opened }) => (opened ? "2" : "-1")};
 `;
 
 const PopupContainer = styled.div`
@@ -140,14 +125,17 @@ const Form = styled.form`
 const SubmitButton = styled.button`
   width: 358px;
   height: 50px;
-  background: #000000;
-  border: none;
+  background: ${({ disabled }) => (disabled ? "#ffffff" : "#000000")};
+  ${({ disabled }) => disabled && "opacity: 0.8"};
+  border: ${({ disabled }) => (disabled ? "1px solid #000000;" : "none")};
   border-radius: 2px;
   outline: none;
   font-size: 18px;
   line-height: 22px;
   font-weight: 400;
-  color: #ffffff;
+  color: ${({ disabled }) => (disabled ? "#000000" : "#ffffff")};
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+
   transition: opacity 0.5s ease-out;
   margin: 38px 0 34px 0;
 
@@ -162,13 +150,6 @@ const SubmitButton = styled.button`
   :hover {
     opacity: 0.8;
   }
-
-  &.disabled {
-    background: #ffffff;
-    opacity: 0.2;
-    border: 1px solid #000000;
-    color: #000000;
-  }
 `;
 
 const CloseButton = styled.button`
@@ -178,6 +159,7 @@ const CloseButton = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0;
   padding: 0;

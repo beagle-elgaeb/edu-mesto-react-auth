@@ -204,6 +204,7 @@ const Eye = styled.button`
   opacity: 0.6;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0;
   padding: 0;
@@ -246,6 +247,7 @@ const SubmitButton = styled.button`
   font-size: 18px;
   line-height: 22px;
   color: ${({ disabled }) => (disabled ? "#BBBBBB" : "#000000")};
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 159px 0 0;
 
@@ -276,6 +278,7 @@ const Question = styled.p`
 const QuestionLink = styled(Link)`
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
 
   @media (max-width: 680px) {

@@ -18,7 +18,7 @@ function InfoTooltip({ success, isOpen, onClose, onKeydown }) {
   }, [isOpen]);
 
   return (
-    <PopupOverlay className={`popup_type_tooltype ${isOpen && "opened"}`} onClick={onClose}>
+    <PopupOverlay opened={isOpen} onClick={onClose}>
       <PopupContainer onClick={(e) => e.stopPropagation()}>
         <ToolTyipIcon src={success ? imageOk : imageErr} alt={success ? "ОК" : "Ошибка"} />
         <Text>
@@ -50,18 +50,12 @@ const PopupOverlay = styled.div`
   position: fixed;
   top: 0;
   overflow: hidden;
-  visibility: hidden;
-  opacity: 0;
+  visibility: ${({ opened }) => (opened ? "visible" : "hidden")};
+  opacity: ${({ opened }) => (opened ? "1" : "0")};
   background: rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease-in;
   margin: 0;
-  z-index: -1;
-
-  &.opened {
-    visibility: visible;
-    opacity: 1;
-    z-index: 2;
-  }
+  z-index: ${({ opened }) => (opened ? "2" : "-1")};
 `;
 
 const PopupContainer = styled.div`
@@ -109,6 +103,7 @@ const CloseButton = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  cursor: pointer;
   transition: opacity 0.5s ease-out;
   margin: 0;
   padding: 0;
