@@ -4,7 +4,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 
 import api from "../utils/Api";
-import * as auth from "../utils/Auth.js";
+import * as auth from "../utils/Auth";
 
 import ProtectedRoute from "./ProtectedRoute";
 
