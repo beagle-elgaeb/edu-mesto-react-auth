@@ -72,4 +72,4 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
 
 ### Учебная информация
 
-_Дата сдачи ПР 12: \_\_.09.2021_ [Ссылка на макет в Figma](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12)\_
+_Дата сдачи ПР 12: 13.09.2021_ [Ссылка на макет в Figma](https://www.figma.com/file/5H3gsn5lIGPwzBPby9jAOo/JavaScript.-Sprint-12)\_
