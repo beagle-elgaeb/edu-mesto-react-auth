@@ -1,6 +1,4 @@
 {
-  "homepage": "https://beagle-elgaeb.github.io/",
-  "name": "mesto-react-auth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,8 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "cross-env PUBLIC_URL=/mesto-react-auth npm run build",
-    "deploy": "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "scp -r ./build/* beagle-elgaeb@178.154.205.40:/home/beagle-elgaeb/mesto-frontend"
   },
   "eslintConfig": {
     "extends": [
