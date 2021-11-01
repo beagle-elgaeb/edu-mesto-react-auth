@@ -2,7 +2,7 @@
 
 ## Пятая учебная работа Никоновой Евгении для Яндекс.Практикум
 
-_[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.github.io/mesto-react-auth/)_
+_[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.github.io/edu-mesto-react-auth/)_
 
 <p>
   <a href="https://developer.mozilla.org/ru/docs/Web/CSS"><img src="readme/icon-css3.svg" alt="CSS3"></a>
@@ -37,7 +37,7 @@ _[Ссылка на страницу на GitHub Pages](https://beagle-elgaeb.gi
 - лайф валидация с _[Formik](https://formik.org/)_ и _[Yup](https://github.com/jquense/yup)_;
 - используется css-in-js библиотека _[styled-components](https://styled-components.com/)_;
 - проработан UX (при отправке данных на сервер меняется состояние кнопки / появляются loader'ы);
-- [страница размещена на GitHub Pages](https://beagle-elgaeb.github.io/mesto-react-auth/);
+- [страница размещена на GitHub Pages](https://beagle-elgaeb.github.io/edu-mesto-react-auth/);
 - страница адаптируется с контрольными точками: 320px, 680px, 980px, 1280px.
 
 ### Задачи учебного проекта
